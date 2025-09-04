@@ -1,16 +1,13 @@
-## Hi there 👋
+Sorriso Vida 🦷
+Bem-vindo ao repositório oficial da Sorriso Vida, a clínica odontológica que cuida do seu sorriso e da sua saúde bucal.
 
-<!--
-**SorrisoVida/SorrisoVida** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+🎯 Sobre a Sorriso Vida
+A Sorriso Vida é mais que uma clínica; é um espaço dedicado à saúde e ao bem-estar. Nossa missão é oferecer um atendimento odontológico de alta qualidade, com foco em:
 
-Here are some ideas to get you started:
+Excelência no atendimento: Profissionais qualificados e um ambiente acolhedor.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Inovação tecnológica: Equipamentos modernos para diagnósticos precisos e tratamentos eficazes.
+
+Cuidado humano: Cada paciente é único, e nosso plano de tratamento é feito sob medida.
+
+Este repositório serve como a base central para todos os nossos projetos digitais, incluindo o nosso site, sistemas internos e outras ferramentas que ajudam a aprimorar nossos serviços.
