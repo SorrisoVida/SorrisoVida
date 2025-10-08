@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Agendamento - Clínica SorrisoVida</title>
+    
+    <link rel="stylesheet" href="styleForm.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h3 class="form-title">Agendar Nova Consulta</h3>
+        <p class="form-subtitle">Selecione o serviço, o profissional e a data desejada.</p>
+
+        <form class="appointment-form">
+            <div class="form-group">
+                <label for="service">Serviço / Especialidade</label>
+                <select id="service" name="service" required>
+                    <option value="" disabled selected>Escolha um serviço...</option>
+                    <option value="limpeza">Limpeza e Avaliação</option>
+                    <option value="clareamento">Clareamento Dental</option>
+                    <option value="canal">Tratamento de Canal</option>
+                    <option value="ortodontia">Consulta de Ortodontia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dentist">Selecione o Profissional</label>
+                <select id="dentist" name="dentist">
+                    <option value="" selected>Qualquer profissional</option>
+                    <option value="ana">Dr. Ana Oliveira</option>
+                    <option value="pedro">Dr. Pedro Santos</option>
+                    <option value="carla">Dra. Carla Mendes</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Data Desejada</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Horários Disponíveis</label>
+                <div id="time-slots" class="time-slots-grid">
+                    <button type="button" class="slot-button active">09:00</button>
+                    <button type="button" class="slot-button">10:30</button>
+                    <button type="button" class="slot-button disabled">14:00</button>
+                    <button type="button" class="slot-button">16:30</button>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="cta-button primary-submit">
+                    Confirmar Agendamento
+                </button>
+            </div>
+        </form>
+    </div>
+
+    
+</body>
+</html>
