@@ -1,0 +1,124 @@
+/* Variáveis de Cores (Manter a consistência) */
+:root {
+    --primary-color: #2a9d8f; /* Verde-água/Turquesa */
+    --secondary-color: #f7a072; /* Laranja/Pêssego para CTA */
+    --text-dark: #333;
+    --text-light: #fff;
+    --bg-light: #f5f7fa;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --error-color: #ff4d4f; /* Vermelho para erro */
+    --success-color: #52c41a; /* Verde para sucesso */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* Estilo do Container e Títulos */
+.form-container {
+    max-width: 480px; /* Um pouco mais estreito para cadastro */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    color: var(--primary-color);
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.form-subtitle {
+    color: #666;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Estilo dos Grupos de Campo */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+}
+
+/* Estilo dos Inputs */
+.register-form input[type="text"],
+.register-form input[type="tel"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.register-form input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.2);
+}
+
+/* Estilo de Erro (usado pelo JS) */
+.input-error {
+    border-color: var(--error-color) !important;
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2) !important;
+}
+
+/* Checkbox e Termos */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Botão de Ação Principal */
+.form-actions {
+    text-align: center;
+}
+
+.primary-submit {
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%; /* Botão em largura total */
+    transition: background-color 0.3s;
+}
+
+.primary-submit:hover:not(:disabled) {
+    background-color: #e09267;
+}
+
+.primary-submit:disabled {
+    background-color: #ccc !important;
+    cursor: wait;
+    color: #666;
+}

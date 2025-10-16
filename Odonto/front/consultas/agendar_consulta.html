@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorrisoVida - Agendar Consulta</title>
+    <link rel="stylesheet" href="C:/xampp/htdocs/Odonto/front/telaInicial/telastylesInicial.css"> 
+    <link rel="stylesheet" href="stylesAgendamento.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tooth"></i> SorrisoVida
+            </div>
+            <div class="user-menu-container">
+                <div class="user-info" id="userInfoButton">
+                    <img src="avatar.jpg" alt="Foto do Usuário" class="user-avatar">
+                    Olá, Pedro! <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="cadastro.html" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <nav class="sidebar">
+                <ul>
+                    <li><i class="fas fa-home"></i> Início</li>
+                    <li class="active"><i class="fas fa-calendar-plus"></i> Agendar Consulta</li> 
+                    <li><i class="fas fa-calendar-alt"></i> Minhas Consultas</li>
+                    <li><i class="fas fa-history"></i> Histórico</li>
+                    <li><i class="fas fa-bell"></i> Notificações</li>
+                    <li><i class="fas fa-cog"></i> Configurações</li>
+                </ul>
+            </nav>
+
+            <section class="main-content">
+                <h2>Agendar Nova Consulta</h2>
+
+                <div class="card form-agendamento-card">
+                    <h3 class="card-title">Selecione o Serviço e Horário</h3>
+                    <form id="scheduleForm" method="POST" action="processa_agendamento.php">
+                        
+                        <div class="form-group">
+                            <label for="servico">Serviço Desejado</label>
+                            <select id="servico" name="servico" required>
+                                <option value="">Selecione um Serviço</option>
+                                <option value="Limpeza e Avaliação">Limpeza e Avaliação</option>
+                                <option value="Tratamento de Canal">Tratamento de Canal</option>
+                                <option value="Clareamento Dental">Clareamento Dental</option>
+                                <option value="Extração">Extração</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dataConsulta">Data da Consulta</label>
+                            <input type="date" id="dataConsulta" name="dataConsulta" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dentista">Profissional Preferido</label>
+                            <select id="dentista" name="dentista" required>
+                                <option value="">Selecione o Dentista</option>
+                                <option value="Dr. Ana Oliveira">Dr. Ana Oliveira</option>
+                                <option value="Dr. Carlos Silva">Dr. Carlos Silva</option>
+                                <option value="Dra. Beatriz Santos">Dra. Beatriz Santos</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horario">Horário Disponível</label>
+                            <select id="horario" name="horario" required disabled>
+                                <option value="">Selecione a Data Primeiro</option>
+                            </select>
+                            <small id="horarioFeedback"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacoes">Observações (Opcional)</label>
+                            <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex: Tenho sensibilidade em dentes específicos."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="cta-button">Confirmar Agendamento</button>
+                        </div>
+                    </form>
+                </div>
+                </section>
+        </main>
+    </div>
+    <script src="scriptAgendamento.js"></script>
+    <script src="scriptInicial.js"></script> 
+</body>
+</html>

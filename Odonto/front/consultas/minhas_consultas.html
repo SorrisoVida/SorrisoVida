@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorrisoVida - Minhas Consultas</title>
+    <link rel="stylesheet" href="stylesInicial.css"> 
+    <link rel="stylesheet" href="stylesMinhasConsultas.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tooth"></i> SorrisoVida
+            </div>
+            <div class="user-menu-container">
+                <div class="user-info" id="userInfoButton">
+                    <img src="avatar.jpg" alt="Foto do Usuário" class="user-avatar">
+                    Olá, Pedro! <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="cadastro.html" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <nav class="sidebar">
+                <ul>
+                    <li><i class="fas fa-home"></i> Início</li>
+                    <li><i class="fas fa-calendar-plus"></i> Agendar Consulta</li> 
+                    <li class="active"><i class="fas fa-calendar-alt"></i> Minhas Consultas</li> 
+                    <li><i class="fas fa-history"></i> Histórico</li>
+                    <li><i class="fas fa-bell"></i> Notificações</li>
+                    <li><i class="fas fa-cog"></i> Configurações</li>
+                </ul>
+            </nav>
+
+            <section class="main-content">
+                <h2>Minhas Consultas</h2>
+
+                <div class="consultas-filters">
+                    <label for="filterStatus">Filtrar por Status:</label>
+                    <select id="filterStatus">
+                        <option value="Todas">Todas</option>
+                        <option value="Agendada">Agendadas</option>
+                        <option value="Confirmada">Confirmadas</option>
+                        <option value="Realizada">Realizadas</option>
+                        <option value="Cancelada">Canceladas</option>
+                    </select>
+                </div>
+
+                <div class="consultas-list" id="consultasList">
+                    <div class="card empty-state" id="loadingState">
+                        <p><i class="fas fa-spinner fa-spin"></i> Carregando suas consultas...</p>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="scriptInicial.js"></script> 
+    <script src="scriptMinhasConsultas.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+/* Arquivo: stylesAgendamento.css */
+
+/* Estilos de layout para o formulário */
+.form-agendamento-card {
+    max-width: 600px; /* Limita a largura do formulário para melhor leitura */
+    margin: 0 auto; /* Centraliza o card */
+    padding: 30px;
+}
+
+.card-title {
+    color: var(--primary-color, #2a9d8f);
+    margin-top: 0;
+    border-bottom: 2px solid var(--bg-light, #f5f7fa);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark, #333);
+}
+
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color, #2a9d8f);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Estilo para a mensagem de feedback de horário */
+#horarioFeedback {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #999;
+}
+
+/* Alinha o botão de confirmação à direita ou centraliza */
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+}

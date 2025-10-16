@@ -1,0 +1,124 @@
+/* Arquivo: stylesMinhasConsultas.css */
+
+/* --- Barra de Filtros --- */
+.consultas-filters {
+    background-color: var(--card-bg, #fff);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.consultas-filters label {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.consultas-filters select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/* --- Lista de Consultas --- */
+.consultas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo individual do Card de Consulta */
+.consulta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--card-bg, #fff);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.consulta-item:hover {
+    transform: translateY(-2px);
+}
+
+.consulta-info {
+    flex-grow: 1;
+}
+
+.consulta-info h4 {
+    margin: 0 0 5px 0;
+    color: var(--primary-color, #2a9d8f);
+    font-size: 18px;
+}
+
+.consulta-info p {
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+.consulta-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.consulta-actions button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar {
+    background-color: #ff6b6b;
+    color: white;
+}
+.btn-cancelar:hover {
+    background-color: #e63946;
+}
+
+.btn-detalhes {
+    background-color: #ccc;
+    color: var(--text-dark);
+}
+.btn-detalhes:hover {
+    background-color: #bbb;
+}
+
+/* Estilo para a tag de status */
+.status-tag {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-agendada {
+    background-color: #ffeaa7; /* Amarelo claro */
+    color: #fdcb6e;
+}
+.status-confirmada {
+    background-color: #b8e994; /* Verde claro */
+    color: #4cd137;
+}
+.status-realizada {
+    background-color: #dfe6e9; /* Cinza claro */
+    color: #636e72;
+}
+.status-cancelada {
+    background-color: #fab1a0; /* Vermelho claro */
+    color: #d63031;
+}
+
+/* Estado Vazio */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
