@@ -1,1 +1,9 @@
-<p>login works!</p>
+<div class="auth-container">
+  <h2>Entrar</h2>
+  <form (ngSubmit)="onLogin()">
+    <input [(ngModel)]="email" name="email" type="email" placeholder="E-mail" required />
+    <input [(ngModel)]="senha" name="senha" type="password" placeholder="Senha" required />
+    <button type="submit">Entrar</button>
+  </form>
+  <p>Não tem conta? <a routerLink="/inscreva-se">Crie uma conta</a></p>
+</div>
