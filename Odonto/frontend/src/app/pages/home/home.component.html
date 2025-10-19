@@ -1,11 +1,10 @@
-<!-- 1. Hero Section com Carrossel -->
 <section class="hero-section">
   <carousel [isAnimated]="true" [noPause]="false" [interval]="5000">
     <slide *ngFor="let slide of slides">
       <img [src]="slide.image" [alt]="slide.alt" class="slide-image">
       <div class="carousel-caption d-none d-md-block">
         <p class="lead my-4">Na SorrisoVida, sua saúde bucal é nossa prioridade. Oferecemos um atendimento completo e humanizado para você e sua família.</p>
-        <a routerLink="/schedule" class="btn btn-primary btn-lg">Agende sua consulta</a>
+        <a routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</a>
       </div>
     </slide>
   </carousel>
@@ -20,10 +19,10 @@
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <i class="bi bi-braces fs-1 text-primary mb-3"></i>
+            <i class="bi bi-braces fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Ortodontia</h5>
             <p class="card-text">Alinhamento perfeito para o seu sorriso com os aparelhos mais modernos.</p>
-            <a href="#" class="btn btn-outline-primary">Saiba mais</a>
+            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
           </div>
         </div>
       </div>
@@ -31,10 +30,10 @@
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <i class="bi bi-brightness-high fs-1 text-primary mb-3"></i>
+            <i class="bi bi-brightness-high fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Clareamento Dental</h5>
             <p class="card-text">Recupere o branco natural dos seus dentes com segurança e eficácia.</p>
-            <a href="#" class="btn btn-outline-primary">Saiba mais</a>
+            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
           </div>
         </div>
       </div>
@@ -42,10 +41,10 @@
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <i class="bi bi-gem fs-1 text-primary mb-3"></i>
+            <i class="bi bi-gem fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Implantes</h5>
             <p class="card-text">Soluções definitivas para a perda de dentes, com tecnologia de ponta.</p>
-            <a href="#" class="btn btn-outline-primary">Saiba mais</a>
+            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
           </div>
         </div>
       </div>
@@ -56,19 +55,19 @@
     <h2 class="section-title mb-4">Por que escolher a SorrisoVida?</h2>
     <div class="row">
       <div class="col-md-3">
-        <i class="bi bi-people-fill fs-2 text-primary"></i>
+        <i class="bi bi-people-fill fs-2 text-secondary"></i>
         <h5 class="mt-2">Equipe Especializada</h5>
       </div>
       <div class="col-md-3">
-        <i class="bi bi-heart-fill fs-2 text-primary"></i>
+        <i class="bi bi-heart-fill fs-2 text-secondary"></i>
         <h5 class="mt-2">Atendimento Humanizado</h5>
       </div>
       <div class="col-md-3">
-        <i class="bi bi-cpu-fill fs-2 text-primary"></i>
+        <i class="bi bi-cpu-fill fs-2 text-secondary"></i>
         <h5 class="mt-2">Tecnologia de Ponta</h5>
       </div>
       <div class="col-md-3">
-        <i class="bi bi-shield-check fs-2 text-primary"></i>
+        <i class="bi bi-shield-check fs-2 text-secondary"></i>
         <h5 class="mt-2">Ambiente Acolhedor</h5>
       </div>
     </div>

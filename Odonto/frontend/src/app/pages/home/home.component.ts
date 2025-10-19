@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  standalone: true, 
   imports: [CommonModule, CarouselModule], 
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   slides = [

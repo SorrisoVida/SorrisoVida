@@ -1,1 +1,10 @@
-@use 'bootstrap/scss/bootstrap' as *;
+// 1. Import your custom variables.
+@use 'variables' as v;
+
+// 2. Override Bootstrap's default variables *before* importing Bootstrap.
+// This is the required method for Bootstrap's architecture.
+$primary: v.$primary-color;
+$secondary: v.$secondary-color;
+
+// 3. Import Bootstrap. It will now use the overridden variables above.
+@import 'bootstrap/scss/bootstrap';

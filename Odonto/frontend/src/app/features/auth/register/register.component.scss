@@ -1,0 +1,20 @@
+@use '../auth-base';
+
+// Estilo da página para centralizar o conteúdo
+.register-page {
+  @include auth-base.auth-page-layout;
+}
+
+.auth-wrapper {
+  max-width: 600px;
+}
+
+// Container principal do formulário
+.register-container {
+  @include auth-base.form-container-layout(600px);
+  @include auth-base.auth-container-content(600px);
+}
+
+.return {
+  margin-bottom: 5px;
+}
