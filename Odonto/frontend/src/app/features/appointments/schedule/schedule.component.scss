@@ -27,7 +27,6 @@
       margin-bottom: 1.5rem;
     }
 
-    // Estilo para inputs e selects herdado do Bootstrap, mas garantimos o foco
     .form-control:focus,
     .form-select:focus {
       border-color: v.$focus-border-color;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Profissional } from './models/profissional.model';
 
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [FormsModule, RouterModule], 
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
 })
@@ -44,10 +44,9 @@ export class ScheduleComponent implements OnInit {
     }, 500);
   }
 
-  // Este método será chamado sempre que um filtro for alterado
   onFilterChange(): void {
-    this.horarioSelecionado = null; // Reseta o horário selecionado
-    this.horariosDisponiveis = []; // Limpa os horários antigos
+    this.horarioSelecionado = null; 
+    this.horariosDisponiveis = []; 
 
     // Só busca novos horários se uma data e um profissional forem selecionados
     if (this.dataSelecionada && this.profissionalSelecionado) {
@@ -59,12 +58,11 @@ export class ScheduleComponent implements OnInit {
   buscarHorarios(): void {
     this.carregandoHorarios = true;
     setTimeout(() => {
-      // Lógica de exemplo: retorna horários diferentes para cada profissional
-      if (this.profissionalSelecionado === 1) { // Dra. Ana Paula
+      if (this.profissionalSelecionado === 1) { 
         this.horariosDisponiveis = ["09:00", "10:00", "11:00"];
-      } else if (this.profissionalSelecionado === 2) { // Dr. Carlos Souza
+      } else if (this.profissionalSelecionado === 2) { 
         this.horariosDisponiveis = ["14:00", "15:00", "16:00"];
-      } else { // Qualquer profissional
+      } else { 
         this.horariosDisponiveis = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
       }
       this.carregandoHorarios = false;

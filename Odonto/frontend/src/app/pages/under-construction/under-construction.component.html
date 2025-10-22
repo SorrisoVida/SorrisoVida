@@ -1,0 +1,10 @@
+<div class="container text-center my-5 construction-page">
+  <i class="bi bi-cone-striped display-1 text-warning"></i>
+  <h1 class="mt-4">Página em Construção</h1>
+  <p class="lead text-muted">Estamos trabalhando para trazer o melhor conteúdo para você. </p>
+  
+  @if (authService.isAuthenticated()) {
+    <p>Enquanto isso, que tal agendar sua próxima consulta?</p>
+    <a routerLink="/schedule" class="btn btn-primary btn-lg mt-3">Agendar Consulta</a>
+  }
+</div>

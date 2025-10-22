@@ -4,11 +4,16 @@
       <img [src]="slide.image" [alt]="slide.alt" class="slide-image">
       <div class="carousel-caption d-none d-md-block">
         <p class="lead my-4">Na SorrisoVida, sua saúde bucal é nossa prioridade. Oferecemos um atendimento completo e humanizado para você e sua família.</p>
-        <a routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</a>
+        <button routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</button>
       </div>
     </slide>
   </carousel>
 </section>
+
+<!-- Botão de Desenvolvimento-->
+<div class="container text-center my-3">
+  <button (click)="simularLogin()" class="btn btn-warning">Simular Login</button>
+</div>
 
 <div class="container my-5">
 
@@ -22,7 +27,10 @@
             <i class="bi bi-braces fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Ortodontia</h5>
             <p class="card-text">Alinhamento perfeito para o seu sorriso com os aparelhos mais modernos.</p>
-            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
+            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
+               class="btn btn-outline-secondary">
+              Saiba mais
+            </a>
           </div>
         </div>
       </div>
@@ -33,7 +41,10 @@
             <i class="bi bi-brightness-high fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Clareamento Dental</h5>
             <p class="card-text">Recupere o branco natural dos seus dentes com segurança e eficácia.</p>
-            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
+            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
+               class="btn btn-outline-secondary">
+              Saiba mais
+            </a>
           </div>
         </div>
       </div>
@@ -44,7 +55,10 @@
             <i class="bi bi-gem fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Implantes</h5>
             <p class="card-text">Soluções definitivas para a perda de dentes, com tecnologia de ponta.</p>
-            <a href="#" class="btn btn-outline-secondary">Saiba mais</a>
+            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
+               class="btn btn-outline-secondary">
+              Saiba mais
+            </a>
           </div>
         </div>
       </div>

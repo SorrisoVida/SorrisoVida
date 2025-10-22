@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  user: any;
+
   constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.currentUser.subscribe(user => this.user = user);
+  }
 
   logout(): void {
     this.authService.logout();
