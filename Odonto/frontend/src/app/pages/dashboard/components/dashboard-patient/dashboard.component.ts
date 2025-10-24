@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService, User } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Appointment } from '../../models/appointment.model';
@@ -9,15 +9,17 @@ import { Appointment } from '../../models/appointment.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss'] // Corrigido para styleUrls
 })
 export class DashboardComponent implements OnInit {
+  user: User | null = null;
   proximaConsulta: Appointment | null = null;
   historicoConsultas: Appointment[] = [];
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
     this.carregarConsultas();
   }
 

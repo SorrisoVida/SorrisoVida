@@ -1,14 +1,40 @@
-<div class="dashboard-container container-fluid my-4">
+<div class="dashboard-container container my-5">
+  <!-- Cabeçalho de Boas-Vindas -->
+  <div class="header mb-5">
+    <h1 class="display-5">Painel de Controle</h1>
+    <p class="lead text-muted">Bem-vindo(a), {{ currentUser?.nome }}! ({{ currentUser?.role }})</p>
+  </div>
+
   <div class="row g-4">
     <!-- Widgets para ATENDENTE -->
     <ng-container *ngIf="isAtendente">
       <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-people-fill me-2"></i>Sala de Espera</h5>
             <p class="display-4 fw-bold">{{ pacientesEmEspera }}</p>
             <p class="card-text">Pacientes aguardando atendimento.</p>
-            <a routerLink="/under-construction" class="btn btn-primary">Gerenciar Fila</a>
+            <a routerLink="/under-construction" class="btn btn-secondary stretched-link">Gerenciar Fila</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body text-center d-flex flex-column justify-content-center">
+            <i class="bi bi-telephone-inbound-fill display-4 text-secondary"></i>
+            <h5 class="card-title mt-3">Confirmar Consultas</h5>
+            <p class="card-text">Ligue para os pacientes para confirmar as consultas de amanhã.</p>
+            <a routerLink="/under-construction" class="btn btn-outline-secondary stretched-link">Ver Lista</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+          <div class="card-body text-center d-flex flex-column justify-content-center">
+            <i class="bi bi-person-plus-fill display-4 text-secondary"></i>
+            <h5 class="card-title mt-3">Cadastrar Paciente</h5>
+            <p class="card-text">Crie um novo perfil para pacientes que chegam à clínica.</p>
+            <a routerLink="/under-construction" class="btn btn-secondary stretched-link">Novo Cadastro</a>
           </div>
         </div>
       </div>
@@ -16,17 +42,28 @@
 
     <!-- Widgets para DENTISTA e ATENDENTE -->
     <ng-container *ngIf="isDentista || isAtendente">
-      <div class="col-md-6 col-lg-8">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
+      <div class="col-md-6 col-lg-4" *ngIf="isDentista">
+        <div class="card h-100">
+          <div class="card-body text-center d-flex flex-column justify-content-center">
+            <i class="bi bi-journal-medical display-4 text-secondary"></i>
+            <h5 class="card-title mt-3">Meus Pacientes</h5>
+            <p class="card-text">Acesse o prontuário e o histórico dos seus pacientes.</p>
+            <a routerLink="/under-construction" class="btn btn-outline-secondary stretched-link">Buscar Paciente</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title"><i class="bi bi-calendar-day me-2"></i>Agenda do Dia</h5>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush flex-grow-1">
               <li *ngFor="let item of agendaDoDia" class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>{{ item.horario }}</strong> - {{ item.paciente }}</span>
-                <span class="badge bg-secondary rounded-pill">{{ item.servico }}</span>
+                <span class="badge bg-info text-dark rounded-pill">{{ item.servico }}</span>
               </li>
-              <li *ngIf="agendaDoDia.length === 0" class="list-group-item">Nenhum agendamento para hoje.</li>
+              <li *ngIf="agendaDoDia.length === 0" class="list-group-item text-muted">Nenhum agendamento para hoje.</li>
             </ul>
+            <a routerLink="/under-construction" class="btn btn-outline-secondary btn-sm mt-3 align-self-start">Ver Agenda Completa</a>
           </div>
         </div>
       </div>

@@ -25,6 +25,7 @@ export const routes: Routes = [
       { path: 'servicos', component: ServicesComponent, canActivate: [AuthGuard] }, 
       { path: 'contato', component: ContactComponent }, 
       { path: 'schedule', component: ScheduleComponent , canActivate: [AuthGuard]  },
+      { path: 'perfil', loadComponent: () => import('./pages/Profiles/profile.component').then(m => m.ProfileComponent), canActivate: [AuthGuard] },
       { path: 'under-construction', loadComponent: () => import('./pages/under-construction/under-construction.component').then(m => m.UnderConstructionComponent) },
       
       // Rotas do Dashboard (agrupadas para melhor organização)

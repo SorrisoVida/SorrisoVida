@@ -1,3 +1,16 @@
-.card-title i {
-    font-size: 1.2rem;
+@use 'variables' as v;
+
+.dashboard-container {
+  .header h1 {
+    font-weight: 300;
+  }
+
+  .card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+  }
 }

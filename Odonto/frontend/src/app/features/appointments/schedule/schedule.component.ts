@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Profissional } from './models/profissional.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-schedule',
@@ -27,7 +28,10 @@ export class ScheduleComponent implements OnInit {
   carregandoProfissionais = false;
   carregandoHorarios = false;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.buscarProfissionais();
@@ -78,5 +82,29 @@ export class ScheduleComponent implements OnInit {
   // Método para otimizar o *ngFor
   trackByProfissional(index: number, profissional: Profissional): number {
     return profissional.id;
+  }
+
+  /**
+   * Navega o usuário de volta para a sua página principal (dashboard ou home).
+   */
+  navigateBack(): void {
+    const user = this.authService.getUser();
+    let returnUrl = '/home'; // Rota padrão para visitantes
+
+    if (user) {
+      switch (user.role) {
+        case 'admin':
+          returnUrl = '/dashboard/admin';
+          break;
+        case 'dentista':
+        case 'atendente':
+          returnUrl = '/dashboard/funcionario';
+          break;
+        case 'paciente':
+          returnUrl = '/dashboard/paciente';
+          break;
+      }
+    }
+    this.router.navigate([returnUrl]);
   }
 }

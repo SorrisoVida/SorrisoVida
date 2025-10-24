@@ -54,11 +54,12 @@
               </a>
               <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="button-basic">
                 <!-- Item de Perfil (Comum a todos) -->
-                <li><a class="dropdown-item" [routerLink]="['/under-construction']"><i class="bi bi-person-fill me-2"></i>Perfil</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/perfil']"><i class="bi bi-person-fill me-2"></i>Perfil</a></li>
                 
                 <!-- Menu do Paciente -->
                 <ng-container *ngIf="isPatient">
                   <li><a class="dropdown-item" [routerLink]="['/dashboard/paciente']"><i class="bi bi-grid-1x2-fill me-2"></i>Meu Painel</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/dashboard/paciente']"><i class="bi bi-card-list me-2"></i>Minhas Consultas</a></li>
                   <li><a class="dropdown-item" [routerLink]="['/schedule']"><i class="bi bi-calendar-plus-fill me-2"></i>Agendar Consulta</a></li>
                 </ng-container>
 
