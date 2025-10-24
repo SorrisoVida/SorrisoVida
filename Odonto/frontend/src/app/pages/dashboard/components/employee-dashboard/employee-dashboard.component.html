@@ -1,0 +1,35 @@
+<div class="dashboard-container container-fluid my-4">
+  <div class="row g-4">
+    <!-- Widgets para ATENDENTE -->
+    <ng-container *ngIf="isAtendente">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-people-fill me-2"></i>Sala de Espera</h5>
+            <p class="display-4 fw-bold">{{ pacientesEmEspera }}</p>
+            <p class="card-text">Pacientes aguardando atendimento.</p>
+            <a routerLink="/under-construction" class="btn btn-primary">Gerenciar Fila</a>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Widgets para DENTISTA e ATENDENTE -->
+    <ng-container *ngIf="isDentista || isAtendente">
+      <div class="col-md-6 col-lg-8">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-calendar-day me-2"></i>Agenda do Dia</h5>
+            <ul class="list-group list-group-flush">
+              <li *ngFor="let item of agendaDoDia" class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>{{ item.horario }}</strong> - {{ item.paciente }}</span>
+                <span class="badge bg-secondary rounded-pill">{{ item.servico }}</span>
+              </li>
+              <li *ngIf="agendaDoDia.length === 0" class="list-group-item">Nenhum agendamento para hoje.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

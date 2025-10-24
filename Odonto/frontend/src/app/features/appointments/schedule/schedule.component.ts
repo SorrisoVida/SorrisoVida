@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Profissional } from './models/profissional.model';
 
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [FormsModule, RouterModule], 
+  imports: [CommonModule, FormsModule, RouterModule], 
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
 })
@@ -72,5 +73,10 @@ export class ScheduleComponent implements OnInit {
   // Atualiza o horário selecionado
   selecionarHorario(horario: string): void {
     this.horarioSelecionado = horario;
+  }
+
+  // Método para otimizar o *ngFor
+  trackByProfissional(index: number, profissional: Profissional): number {
+    return profissional.id;
   }
 }

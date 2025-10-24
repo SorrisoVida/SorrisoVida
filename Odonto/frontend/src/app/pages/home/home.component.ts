@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, User } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +13,17 @@ import { AuthService } from '../../services/auth.service';
 export class HomeComponent {
   constructor(public authService: AuthService) {}
 
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
   slides = [
     { image: 'assets/images/img-home.jpg', alt: 'Dentista atendendo paciente' },
     { image: 'assets/images/clinica.jpg', alt: 'clínica' }
   ];
 
   // Método para o botão de desenvolvimento
-  simularLogin(): void {
-    this.authService.simulateLogin();
+  simularLogin(role: User['role']): void {
+    this.authService.simulateLogin(role);
   }
 }

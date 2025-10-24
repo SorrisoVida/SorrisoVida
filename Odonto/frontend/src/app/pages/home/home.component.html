@@ -4,15 +4,27 @@
       <img [src]="slide.image" [alt]="slide.alt" class="slide-image">
       <div class="carousel-caption d-none d-md-block">
         <p class="lead my-4">Na SorrisoVida, sua saúde bucal é nossa prioridade. Oferecemos um atendimento completo e humanizado para você e sua família.</p>
-        <button routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</button>
+        <!-- Link condicional para agendamento -->
+        <ng-container *ngIf="isAuthenticated; else loginRedirect">
+          <a routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</a>
+        </ng-container>
+        <ng-template #loginRedirect>
+          <a routerLink="/auth/login" class="btn btn-secondary btn-lg">Agende sua consulta</a>
+        </ng-template>
       </div>
     </slide>
   </carousel>
 </section>
 
 <!-- Botão de Desenvolvimento-->
-<div class="container text-center my-3">
-  <button (click)="simularLogin()" class="btn btn-warning">Simular Login</button>
+<div class="container text-center my-4 p-3 bg-light rounded shadow-sm">
+  <h5 class="mb-3">Área de Desenvolvimento - Simular Login</h5>
+  <div class="btn-group" role="group">
+    <button (click)="simularLogin('admin')" class="btn btn-danger">Admin</button>
+    <button (click)="simularLogin('dentista')" class="btn btn-info">Dentista</button>
+    <button (click)="simularLogin('atendente')" class="btn btn-warning">Atendente</button>
+    <button (click)="simularLogin('paciente')" class="btn btn-success">Paciente</button>
+  </div>
 </div>
 
 <div class="container my-5">
@@ -27,10 +39,10 @@
             <i class="bi bi-braces fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Ortodontia</h5>
             <p class="card-text">Alinhamento perfeito para o seu sorriso com os aparelhos mais modernos.</p>
-            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
-               class="btn btn-outline-secondary">
-              Saiba mais
-            </a>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
           </div>
         </div>
       </div>
@@ -41,10 +53,10 @@
             <i class="bi bi-brightness-high fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Clareamento Dental</h5>
             <p class="card-text">Recupere o branco natural dos seus dentes com segurança e eficácia.</p>
-            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
-               class="btn btn-outline-secondary">
-              Saiba mais
-            </a>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
           </div>
         </div>
       </div>
@@ -55,10 +67,10 @@
             <i class="bi bi-gem fs-1 text-secondary mb-3"></i>
             <h5 class="card-title">Implantes</h5>
             <p class="card-text">Soluções definitivas para a perda de dentes, com tecnologia de ponta.</p>
-            <a [routerLink]="authService.isAuthenticated() ? ['/under-construction'] : ['/auth/login']" 
-               class="btn btn-outline-secondary">
-              Saiba mais
-            </a>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
           </div>
         </div>
       </div>
