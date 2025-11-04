@@ -25,9 +25,35 @@ export const routes: Routes = [
       { path: 'servicos', component: ServicesComponent, canActivate: [AuthGuard] }, 
       { path: 'contato', component: ContactComponent }, 
       { path: 'schedule', component: ScheduleComponent , canActivate: [AuthGuard]  },
+      { path: 'my-appointments', loadComponent: () => import('./features/appointments/my-appointments/my-appointments.component').then(m => m.MyAppointmentsComponent), canActivate: [AuthGuard] },
       { path: 'perfil', loadComponent: () => import('./pages/Profiles/profile.component').then(m => m.ProfileComponent), canActivate: [AuthGuard] },
       { path: 'under-construction', loadComponent: () => import('./pages/under-construction/under-construction.component').then(m => m.UnderConstructionComponent) },
-      
+
+      // Rotas para ferramentas de funcionários (agora em páginas separadas)
+      {
+        path: 'employee', // Prefixo para todas as ferramentas
+        canActivate: [employeeGuard], // Guarda aplicada a todas as rotas filhas
+        children: [
+          { path: 'gerenciar-fila', loadComponent: () => import('./features/employee-tools/manage-queue/manage-queue.component').then(m => m.ManageQueueComponent) },
+          { path: 'confirmar-consultas', loadComponent: () => import('./features/employee-tools/confirm-appointments/confirm-appointments.component').then(m => m.ConfirmAppointmentsComponent) },
+          { path: 'cadastrar-paciente', loadComponent: () => import('./features/employee-tools/register-patient/register-patient.component').then(m => m.RegisterPatientComponent) },
+          { path: 'buscar-paciente', loadComponent: () => import('./features/employee-tools/search-patient/search-patients.component').then(m => m.SearchPatientsComponent) },
+          { path: 'agenda-completa', loadComponent: () => import('./pages/dashboard/components/employee-dashboard/components/full-schedule/full-schedule.component').then(m => m.FullScheduleComponent) },
+        ]
+      },
+
+      // Rotas para ferramentas de admin
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+        children: [
+          { path: 'gerenciar-usuarios', loadComponent: () => import('./features/admin-tools/manage-users/manage-users.component').then(m => m.ManageUsersComponent) },
+          { path: 'reports', loadComponent: () => import('./features/admin-tools/reports/reports.component').then(m => m.ReportsComponent) },
+          { path: 'approve-registrations', loadComponent: () => import('./features/admin-tools/approve-registrations/approve-registrations.component').then(m => m.ApproveRegistrationsComponent) },
+          { path: 'editar-usuario/:id', loadComponent: () => import('./features/admin-tools/edit-user/edit-user.component').then(m => m.EditUserComponent) },
+        ]
+      },
+
       // Rotas do Dashboard (agrupadas para melhor organização)
       {
         path: 'dashboard',
@@ -36,7 +62,12 @@ export const routes: Routes = [
           // A rota vazia ativa o redirecionador quando o usuário acessa '/dashboard'
           { path: '', component: DashboardRedirectComponent, pathMatch: 'full' },
           { path: 'paciente', component: DashboardComponent }, // Acessado via /dashboard/paciente
-          { path: 'funcionario', component: EmployeeDashboard, canActivate: [employeeGuard] }, // Acessado via /dashboard/funcionario
+          { 
+            path: 'funcionario', 
+            component: EmployeeDashboard, 
+            canActivate: [employeeGuard],
+            // A propriedade 'children' foi removida daqui
+          }, 
           { path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard] } // Acessado via /dashboard/admin
         ]
       },

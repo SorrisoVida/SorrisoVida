@@ -1,0 +1,24 @@
+@use '../../../../variables' as v;
+
+/* Adiciona um pouco mais de vida aos botões e badges */
+.table {
+  .badge {
+    font-size: 0.8rem;
+    padding: 0.4em 0.8em;
+  }
+
+  .btn-group .btn {
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Destaca a linha do paciente que está em atendimento */
+  .table-info {
+    background-color: lighten(v.$primary-color, 35%) !important;
+  }
+}
+/* Adicione estilos específicos para a página de gerenciamento de fila aqui */

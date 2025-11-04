@@ -1,6 +1,9 @@
 @use 'variables' as v;
 
 .dashboard-container {
+  // Adiciona rolagem suave para as âncoras
+  scroll-behavior: smooth;
+
   .header h1 {
     font-weight: 300;
   }
@@ -13,11 +16,24 @@
     }
   }
 
-  .next-appointment-card {
-    p {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
+  .consultas-section {
+    .next-appointment-highlight {
+      border-left: 4px solid v.$primary-color;
+      background-color: lighten(v.$primary-color, 35%);
+    }
+
+    .list-group-item {
+      transition: background-color 0.2s ease-in-out;
+
+      &:not(.next-appointment-highlight):hover {
+        background-color: lighten(v.$primary-color, 38%);
+      }
+    }
+  }
+
+  .table-hover tbody tr:hover {
+    td, th {
+      background-color: lighten(v.$primary-color, 38%);
     }
   }
 }
-

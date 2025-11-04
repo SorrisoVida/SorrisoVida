@@ -59,19 +59,21 @@
                 <!-- Menu do Paciente -->
                 <ng-container *ngIf="isPatient">
                   <li><a class="dropdown-item" [routerLink]="['/dashboard/paciente']"><i class="bi bi-grid-1x2-fill me-2"></i>Meu Painel</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/dashboard/paciente']"><i class="bi bi-card-list me-2"></i>Minhas Consultas</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/my-appointments']"><i class="bi bi-card-list me-2"></i>Minhas Consultas</a></li>
                   <li><a class="dropdown-item" [routerLink]="['/schedule']"><i class="bi bi-calendar-plus-fill me-2"></i>Agendar Consulta</a></li>
                 </ng-container>
 
                 <!-- Menu do Funcionário (Dentista/Atendente) -->
                 <ng-container *ngIf="isEmployee">
-                  <li><a class="dropdown-item" [routerLink]="['/dashboard/funcionario']"><i class="bi bi-clipboard-data-fill me-2"></i>Painel Funcionário</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/dashboard/funcionario']"><i class="bi bi-clipboard-data-fill me-2"></i>Meu Painel</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/employee/agenda-completa']"><i class="bi bi-calendar-day me-2"></i>Minha Agenda</a></li>
                 </ng-container>
 
                 <!-- Menu do Admin -->
                 <ng-container *ngIf="isAdmin">
                   <li><a class="dropdown-item" [routerLink]="['/dashboard/admin']"><i class="bi bi-shield-lock-fill me-2"></i>Painel Admin</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/under-construction']"><i class="bi bi-bar-chart-line-fill me-2"></i>Relatórios</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/gerenciar-usuarios']"><i class="bi bi-people-fill me-2"></i>Gerenciar Usuários</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/reports']"><i class="bi bi-bar-chart-line-fill me-2"></i>Relatórios</a></li>
                 </ng-container>
 
                 <li><hr class="dropdown-divider"></li>

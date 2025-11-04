@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { NavigationService } from '../../../services/navigation.service';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -20,8 +21,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    public navigationService: NavigationService 
+  ) { }
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.fb.group({
@@ -59,29 +60,5 @@ export class ForgotPasswordComponent implements OnInit {
 
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
-  }
-
-  /**
-   * Navega o usuário de volta para a sua página principal (dashboard ou home).
-   */
-  navigateBack(): void {
-    const user = this.authService.getUser();
-    let returnUrl = '/home'; // Rota padrão para visitantes
-
-    if (user) {
-      switch (user.role) {
-        case 'admin':
-          returnUrl = '/dashboard/admin';
-          break;
-        case 'dentista':
-        case 'atendente':
-          returnUrl = '/dashboard/funcionario';
-          break;
-        case 'paciente':
-          returnUrl = '/dashboard/paciente';
-          break;
-      }
-    }
-    this.router.navigate([returnUrl]);
   }
 }

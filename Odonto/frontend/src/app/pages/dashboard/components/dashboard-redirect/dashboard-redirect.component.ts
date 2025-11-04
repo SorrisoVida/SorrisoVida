@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { NavigationService } from '../../../../services/navigation.service';
 @Component({
   selector: 'app-dashboard-redirect',
   standalone: true,
@@ -11,22 +9,11 @@ import { CommonModule } from '@angular/common';
   template: `<p class="text-center mt-5">Redirecionando para o seu painel...</p>`,
 })
 export class DashboardRedirectComponent implements OnInit {
-
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private navigationService: NavigationService
   ) {}
-
   ngOnInit(): void {
-    const user = this.authService.getUser();
-    const userRole = user?.role;
-
-    if (userRole === 'admin') {
-      this.router.navigate(['/dashboard/admin']);
-    } else if (userRole === 'dentista' || userRole === 'atendente') {
-      this.router.navigate(['/dashboard/funcionario']);
-    } else {
-      this.router.navigate(['/dashboard/paciente']);
-    }
+    // A lógica de redirecionamento agora é centralizada no serviço.
+    this.navigationService.navigateBackToDashboard();
   }
 }

@@ -12,27 +12,27 @@
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-cash-coin me-2"></i>Faturamento do Mês</h5>
           <p class="display-4 fw-bold">{{ faturamentoDoMes | currency:'BRL' }}</p>
-          <a routerLink="/under-construction" class="btn btn-light btn-sm stretched-link">Ver Relatórios</a>
+          <a routerLink="/admin/reports" class="btn btn-light btn-sm stretched-link">Ver Relatórios</a>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-lg-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title"><i class="bi bi-person-plus-fill me-2"></i>Cadastros Pendentes</h5>
+          <h5 class="card-title"><i class="bi bi-person-check-fill me-2"></i>Cadastros Pendentes</h5>
           <p class="display-4 fw-bold">{{ cadastrosPendentes }}</p>
           <p class="card-text">Novos usuários aguardando aprovação.</p>
-          <a routerLink="/under-construction" class="btn btn-secondary stretched-link">Analisar Cadastros</a>
+          <a routerLink="/admin/approve-registrations" class="btn btn-secondary stretched-link">Analisar Cadastros</a>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-lg-4">
       <div class="card h-100">
         <div class="card-body text-center d-flex flex-column justify-content-center">
-          <i class="bi bi-people-fill display-4 text-secondary"></i>
+          <i class="bi bi-people-fill display-4 text-primary"></i>
           <h5 class="card-title mt-3">Gerenciar Usuários</h5>
           <p class="card-text">Adicione, edite ou remova funcionários e administradores.</p>
-          <a routerLink="/under-construction" class="btn btn-outline-secondary stretched-link">Ver Usuários</a>
+          <a routerLink="/admin/gerenciar-usuarios" class="btn btn-outline-secondary stretched-link">Ver Usuários</a>
         </div>
       </div>
     </div>

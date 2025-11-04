@@ -22,6 +22,7 @@
   },
   "private": true,
   "dependencies": {
+    "@abacritt/angularx-social-login": "^2.5.1",
     "@angular/common": "^20.3.4",
     "@angular/compiler": "^20.3.4",
     "@angular/core": "^20.3.4",
@@ -42,6 +43,8 @@
     "@angular/cli": "^20.3.4",
     "@angular/compiler-cli": "^20.3.4",
     "@angular/localize": "^20.3.4",
+    "@types/gapi": "^0.0.47",
+    "@types/gapi.client.calendar": "^3.0.12",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",

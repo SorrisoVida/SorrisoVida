@@ -2,6 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { routes } from './app.routes';
@@ -14,6 +15,21 @@ export const appConfig: ApplicationConfig = {
       HttpClientModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot()
-    )
+    ),
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('343772625583-nj5tc61uc40sv75nqvbjig6hdq2bgfdq.apps.googleusercontent.com')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ]
 };

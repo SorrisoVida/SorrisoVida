@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { AuthService, User } from '../../services/auth.service';
+import { AuthService, User } from '../../services/auth.service'; // Mantido para obter o usuário
+import { NavigationService } from '../../services/navigation.service';
 
-// Define um tipo para os dados do formulário, evitando o uso de 'any'.
+// Define um tipo para os dados do formulário
 type ProfileFormType = {
   nome: string | null;
   email: string | null;
@@ -33,8 +34,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    public navigationService: NavigationService 
+  ) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.getUser();
@@ -172,19 +173,6 @@ export class ProfileComponent implements OnInit {
 
   get isEmployee(): boolean {
     return this.isDentista || this.isAtendente;
-  }
-
-  navigateBackToDashboard(): void {
-    let returnUrl = '/home'; // Rota padrão para visitantes (não deve acontecer aqui)
-    if (this.isAdmin) {
-      returnUrl = '/dashboard/admin';
-    } else if (this.isEmployee) {
-      returnUrl = '/dashboard/funcionario';
-    } else {
-      // Paciente
-      returnUrl = '/dashboard/paciente';
-    }
-    this.router.navigate([returnUrl]);
   }
 
   // Getter para verificar se o usuário é paciente

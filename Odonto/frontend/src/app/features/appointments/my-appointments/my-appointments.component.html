@@ -1,0 +1,73 @@
+<div class="container my-5">
+  <!-- Cabeçalho e Botão Voltar -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Minhas Consultas</h1>
+      <p class="lead text-muted">Visualize e gerencie seus agendamentos.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="navigationService.navigateBackToDashboard()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel
+    </button>
+  </div>
+
+  <!-- #################### VISÃO DO PACIENTE #################### -->
+  <ng-container *ngIf="isPatient">
+    <!-- Próximas Consultas -->
+    <div class="consultas-section mb-5">
+      <h4 class="mb-3"><i class="bi bi-calendar-check me-2"></i>Próximas Consultas</h4>
+      
+      <!-- Mensagem de sucesso de cancelamento -->
+      <div *ngIf="showCancellationSuccess" class="alert alert-success d-flex justify-content-between align-items-center">
+        <span>Consulta cancelada com sucesso!</span>
+        <a routerLink="/schedule" class="btn btn-sm btn-outline-success">Agendar Outra</a>
+      </div>
+
+      <div *ngIf="proximasConsultas.length > 0; else noFutureAppointments" class="list-group">
+        <div *ngFor="let consulta of proximasConsultas" 
+           class="list-group-item d-flex justify-content-between align-items-center flex-wrap gap-3"
+           [ngClass]="{'list-group-item-warning': consulta.status === 'agendada', 'list-group-item-info': consulta.status === 'confirmada'}">
+          <div class="flex-grow-1">
+            <h5 class="mb-1">{{ consulta.servico }}</h5>
+            <p class="mb-1">Com {{ consulta.profissional }} em {{ consulta.data | date:'dd/MM/yyyy' }} às {{ consulta.horario }}</p>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge rounded-pill" 
+                  [ngClass]="{'bg-success': consulta.status === 'confirmada', 'bg-warning text-dark': consulta.status === 'agendada'}">{{ consulta.status | titlecase }}</span>
+            <button class="btn btn-sm btn-outline-danger" (click)="cancelarConsulta(consulta.id)" title="Cancelar consulta"><i class="bi bi-x-circle"></i></button>
+          </div>
+        </div>
+      </div>
+      <ng-template #noFutureAppointments>
+        <div class="alert alert-info">Você não possui consultas futuras. <a routerLink="/schedule">Agende uma agora!</a></div>
+      </ng-template>
+    </div>
+
+    <!-- Histórico de Consultas -->
+    <div class="history-section">
+      <h4 class="mb-3"><i class="bi bi-clock-history me-2"></i>Histórico de Consultas</h4>
+      <div *ngIf="historicoConsultas.length > 0; else noHistory" class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Serviço</th>
+              <th>Profissional</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consulta of historicoConsultas">
+              <td>{{ consulta.data | date:'dd/MM/yyyy' }}</td>
+              <td>{{ consulta.servico }}</td>
+              <td>{{ consulta.profissional }}</td>
+              <td><span class="badge" [ngClass]="{'bg-secondary': consulta.status === 'realizada', 'bg-danger': consulta.status === 'cancelada'}">{{ consulta.status | titlecase }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noHistory>
+        <div class="alert alert-secondary">Você ainda não possui um histórico de consultas.</div>
+      </ng-template>
+    </div>
+  </ng-container>
+</div>

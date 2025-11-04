@@ -1,0 +1,65 @@
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Gerenciar Usuários</h1>
+      <p class="lead text-muted">Adicione, edite ou remova usuários do sistema.</p>
+    </div>
+    <a routerLink="/dashboard/admin" class="btn btn-outline-primary">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel Admin
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Usuários</h4>
+    </div>
+    <div class="card-body">
+      <!-- Controles de Filtro e Ordenação -->
+      <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+        <div class="btn-group" role="group" aria-label="Filtro de Perfil">
+          <button type="button" class="btn btn-outline-secondary" [class.active]="activeFilter === 'todos'" (click)="filterByRole('todos')">Todos</button>
+          <button type="button" class="btn btn-outline-secondary" [class.active]="activeFilter === 'paciente'" (click)="filterByRole('paciente')">Pacientes</button>
+          <button type="button" class="btn btn-outline-secondary" [class.active]="activeFilter === 'dentista'" (click)="filterByRole('dentista')">Dentistas</button>
+          <button type="button" class="btn btn-outline-secondary" [class.active]="activeFilter === 'atendente'" (click)="filterByRole('atendente')">Atendentes</button>
+          <button type="button" class="btn btn-outline-secondary" [class.active]="activeFilter === 'admin'" (click)="filterByRole('admin')">Admins</button>
+        </div>
+        <button class="btn btn-light" (click)="sortByName()">
+          <i class="bi bi-sort-alpha-down me-2"></i>Ordenar por Nome (A-Z)
+        </button>
+      </div>
+
+      <div class="table-responsive mt-3">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Email</th>
+              <th scope="col">Perfil (Role)</th>
+              <th scope="col">Status</th>
+              <th scope="col" class="text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+              <td>{{ user.nome }}</td>
+              <td>{{ user.email }}</td>
+              <td><span class="badge" [ngClass]="getRoleClass(user.role)">{{ user.role | titlecase }}</span></td>
+              <td><span class="badge bg-success">Ativo</span></td>
+              <td class="text-center">
+                <button class="btn btn-outline-secondary btn-sm me-2" (click)="editUser(user.id)" title="Editar">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" (click)="removeUser(user.id)" title="Remover">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredUsers.length === 0">
+              <td colspan="5" class="text-center text-muted">Nenhum usuário encontrado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

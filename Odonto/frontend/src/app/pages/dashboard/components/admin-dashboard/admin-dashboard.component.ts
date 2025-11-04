@@ -24,8 +24,7 @@ export class AdminDashboardComponent implements OnInit {
 
   private carregarDadosDoPainel(): void {
     // Simulação de busca de dados para o admin
-    this.faturamentoDoMes = 25450.80;
+    this.faturamentoDoMes = 45800.00;
     this.cadastrosPendentes = 2;
   }
 }
-
