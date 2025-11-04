@@ -1,0 +1,31 @@
+
+@use 'sass:color';
+@import "../../../variables.scss";
+
+.card {
+  background-color: $container-bg-color;
+  border: none;
+}
+
+.card-title {
+  color: $primary-color;
+  font-weight: 600;
+}
+
+h5 {
+  color: $primary-color;
+}
+
+i {
+  color: $primary-color;
+}
+
+.btn-primary {
+  background-color: $secondary-color;
+  border-color: $secondary-color;
+
+  &:hover {
+    background-color: color.adjust($secondary-color, $lightness: -10%);
+    border-color: color.adjust($secondary-color, $lightness: -10%);
+  }
+}

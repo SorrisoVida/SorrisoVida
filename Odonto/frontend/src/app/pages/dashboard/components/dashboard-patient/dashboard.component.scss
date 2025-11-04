@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'sass:color';
 
 .dashboard-container {
   // Adiciona rolagem suave para as âncoras
@@ -19,21 +20,21 @@
   .consultas-section {
     .next-appointment-highlight {
       border-left: 4px solid v.$primary-color;
-      background-color: lighten(v.$primary-color, 35%);
+      background-color: color.adjust(v.$primary-color, $lightness: 35%);
     }
 
     .list-group-item {
       transition: background-color 0.2s ease-in-out;
 
       &:not(.next-appointment-highlight):hover {
-        background-color: lighten(v.$primary-color, 38%);
+        background-color: color.adjust(v.$primary-color, $lightness: 38%);
       }
     }
   }
 
   .table-hover tbody tr:hover {
     td, th {
-      background-color: lighten(v.$primary-color, 38%);
+      background-color: color.adjust(v.$primary-color, $lightness: 38%);
     }
   }
 }

@@ -25,10 +25,10 @@
           <!-- Links públicos, visíveis apenas para visitantes e pacientes -->
           <ng-container *ngIf="!isAdmin && !isEmployee">
             <li class="nav-item">
-              <a class="nav-link fw-medium" [routerLink]="['/under-construction']" >Sobre nós</a>
+              <a class="nav-link fw-medium" routerLink="/sobre-nos" routerLinkActive="active">Sobre nós</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-medium"  [routerLink]="['/under-construction']">Contato</a>
+              <a class="nav-link fw-medium" routerLink="/contato" routerLinkActive="active">Contato</a>
             </li>
           </ng-container>
           <!-- Para Pacientes, mostra um link para a Home -->
@@ -66,7 +66,7 @@
                 <!-- Menu do Funcionário (Dentista/Atendente) -->
                 <ng-container *ngIf="isEmployee">
                   <li><a class="dropdown-item" [routerLink]="['/dashboard/funcionario']"><i class="bi bi-clipboard-data-fill me-2"></i>Meu Painel</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/employee/agenda-completa']"><i class="bi bi-calendar-day me-2"></i>Minha Agenda</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/employee/agenda-completa']"><i class="bi bi-calendar-week-fill me-2"></i>Minha Agenda</a></li>
                 </ng-container>
 
                 <!-- Menu do Admin -->

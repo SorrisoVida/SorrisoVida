@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DashboardComponent } from './pages/dashboard/components/dashboard-patient/dashboard.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'servicos', component: ServicesComponent, canActivate: [AuthGuard] }, 
+      { path: 'sobre-nos', component: AboutUsComponent },
       { path: 'contato', component: ContactComponent }, 
       { path: 'schedule', component: ScheduleComponent , canActivate: [AuthGuard]  },
       { path: 'my-appointments', loadComponent: () => import('./features/appointments/my-appointments/my-appointments.component').then(m => m.MyAppointmentsComponent), canActivate: [AuthGuard] },
