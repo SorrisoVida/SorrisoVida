@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Profissional } from './models/profissional.model';
 import { NavigationService } from '../../../services/navigation.service';
+import { GoogleCalendarService } from '../../../services/google-calendar.service';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
@@ -16,23 +18,27 @@ export class ScheduleComponent implements OnInit {
 
   // Listas para armazenar os dados que virão da API
   profissionais: Profissional[] = [];
-  horariosDisponiveis: string[] = [];
 
   // Modelos para os valores selecionados no formulário
-  servicoSelecionado: number | null = null;
+  servicoSelecionado: string = '';
   profissionalSelecionado: number | null = null;
   dataSelecionada: string = '';
-  horarioSelecionado: string | null = null;
+  horarioSelecionado: string = '';
+  horariosDisponiveis: string[] = [];
+  googleUser: SocialUser | null = null;
 
   // Variáveis para controlar o estado do carregamento
   carregandoProfissionais = false;
   carregandoHorarios = false;
 
   constructor(
-    public navigationService: NavigationService 
+    public navigationService: NavigationService,
+    private googleCalendarService: GoogleCalendarService,
+    private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
+    this.socialAuthService.authState.subscribe(user => this.googleUser = user);
     this.buscarProfissionais();
   }
 
@@ -49,7 +55,6 @@ export class ScheduleComponent implements OnInit {
   }
 
   onFilterChange(): void {
-    this.horarioSelecionado = null; 
     this.horariosDisponiveis = []; 
 
     // Só busca novos horários se uma data e um profissional forem selecionados
@@ -74,12 +79,55 @@ export class ScheduleComponent implements OnInit {
   }
 
   // Atualiza o horário selecionado
-  selecionarHorario(horario: string): void {
+  selecionarHorario(horario: string): void { 
     this.horarioSelecionado = horario;
   }
 
   // Método para otimizar o *ngFor
   trackByProfissional(index: number, profissional: Profissional): number {
     return profissional.id;
+  }
+
+  onSubmit(): void {
+    if (!this.servicoSelecionado || !this.profissionalSelecionado || !this.dataSelecionada || !this.horarioSelecionado) {
+      alert('Por favor, preencha todos os campos para agendar.');
+      return;
+    }
+
+    if (!this.googleUser) {
+      alert('Por favor, conecte sua conta do Google no painel para salvar o agendamento no seu calendário.');
+      return;
+    }
+
+    const profissional = this.profissionais.find(p => p.id === this.profissionalSelecionado);
+    if (!profissional) return;
+
+    // Construir as datas de início e fim
+    const [ano, mes, dia] = this.dataSelecionada.split('-').map(Number);
+    const [hora, minuto] = this.horarioSelecionado.split(':').map(Number);
+
+    const dataInicio = new Date(ano, mes - 1, dia, hora, minuto);
+    const dataFim = new Date(dataInicio.getTime() + 60 * 60 * 1000); // Adiciona 1 hora de duração
+
+    const eventData = {
+      summary: `Consulta: ${this.servicoSelecionado} com ${profissional.nome}`,
+      description: `Serviço agendado: ${this.servicoSelecionado}.`,
+      start: dataInicio,
+      end: dataFim
+    };
+
+    this.googleCalendarService.createAppointment(eventData).subscribe({
+      next: (createdEvent) => {
+        if (createdEvent) {
+          console.log('Evento criado com sucesso:', createdEvent);
+          alert('Consulta agendada e salva no seu Google Agenda com sucesso!');
+          // Lógica para salvar no seu banco de dados e redirecionar
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao criar evento no Google Agenda:', err);
+        alert('Houve um erro ao salvar a consulta no seu Google Agenda. Verifique as permissões e tente novamente.');
+      }
+    });
   }
 }

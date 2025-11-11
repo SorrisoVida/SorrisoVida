@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { SocialAuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { routes } from './app.routes';
@@ -14,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       HttpClientModule,
       BrowserAnimationsModule,
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      SocialLoginModule
     ),
     {
       provide: 'SocialAuthServiceConfig',
@@ -23,7 +24,12 @@ export const appConfig: ApplicationConfig = {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('343772625583-nj5tc61uc40sv75nqvbjig6hdq2bgfdq.apps.googleusercontent.com')
+            provider: new GoogleLoginProvider(
+              '343772625583-nj5tc61uc40sv75nqvbjig6hdq2bgfdq.apps.googleusercontent.com',
+              {
+                scope: 'profile email https://www.googleapis.com/auth/calendar.events'
+              }
+            )
           }
         ],
         onError: (err) => {

@@ -36,9 +36,10 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this.authService.login(this.loginForm.value).subscribe({
+    const payload = { email: this.loginForm.value.email, password: this.loginForm.value.senha };
+    this.authService.login(payload).subscribe({
       next: () => this.router.navigate(['/dashboard']),
-      error: () => alert('Credenciais inválidas')
+      error: (err: any) => alert(err?.error?.message || 'Credenciais inválidas')
     });
   }
 

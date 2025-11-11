@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { Subscription } from 'rxjs';
+import { SocialAuthService, SocialUser, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { GoogleCalendarService, CalendarEvent } from '../../../../../../services/google-calendar.service';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-full-schedule',
@@ -13,26 +12,37 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './full-schedule.component.html',
   styleUrls: ['./full-schedule.component.scss']
 })
-export class FullScheduleComponent implements OnInit {
+export class FullScheduleComponent implements OnInit, OnDestroy {
   loggedIn = false;
   user: SocialUser | null = null;
   appointments: CalendarEvent[] = [];
   isLoading = false;
   error: string | null = null;
+  private subs: Subscription[] = [];
 
-  constructor(
-    private socialAuthService: SocialAuthService,
-    private calendarService: GoogleCalendarService
-  ) {}
+  private socialAuthService = inject(SocialAuthService);
+  private googleCalendarService = inject(GoogleCalendarService);
 
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      if (this.loggedIn) {
-        this.fetchAppointments();
-      }
-    });
+    // Monitorar login status
+    this.subs.push(
+      this.socialAuthService.authState.subscribe(user => {
+        this.user = user || null;
+        this.loggedIn = !!user;
+        if (user) {
+          this.fetchAppointments();
+        }
+      })
+    );
+
+    // Recarregar quando calendar atualizar
+    this.subs.push(
+      this.googleCalendarService.calendarUpdates$.subscribe(() => {
+        if (this.loggedIn) {
+          this.fetchAppointments();
+        }
+      })
+    );
   }
 
   signInWithGoogle(): void {
@@ -41,11 +51,13 @@ export class FullScheduleComponent implements OnInit {
 
   signOut(): void {
     this.socialAuthService.signOut();
+    this.appointments = [];
+    this.loggedIn = false;
   }
 
   fetchAppointments(): void {
     if (!this.loggedIn) {
-      this.error = 'Você precisa estar conectado com o Google para ver a agenda.';
+      this.error = 'Você precisa estar conectado.';
       return;
     }
 
@@ -53,16 +65,21 @@ export class FullScheduleComponent implements OnInit {
     this.error = null;
     this.appointments = [];
 
-    this.calendarService.getAppointments().pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe({
-      next: (response) => {
-        this.appointments = response.items;
+    this.googleCalendarService.getAppointments().subscribe({
+      next: (response: { items: CalendarEvent[] }) => {
+        this.appointments = response.items || [];
+        console.log('Agendamentos carregados:', this.appointments);
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Erro ao buscar agendamentos:', err);
-        this.error = 'Falha ao buscar agendamentos. Verifique sua conexão e permissões no Google Calendar.';
+        this.error = 'Erro ao buscar agendamentos. Verifique suas permissões no Google Calendar.';
+        this.isLoading = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 }

@@ -29,7 +29,6 @@ export const routes: Routes = [
       { path: 'schedule', component: ScheduleComponent , canActivate: [AuthGuard]  },
       { path: 'my-appointments', loadComponent: () => import('./features/appointments/my-appointments/my-appointments.component').then(m => m.MyAppointmentsComponent), canActivate: [AuthGuard] },
       { path: 'perfil', loadComponent: () => import('./pages/Profiles/profile.component').then(m => m.ProfileComponent), canActivate: [AuthGuard] },
-      { path: 'under-construction', loadComponent: () => import('./pages/under-construction/under-construction.component').then(m => m.UnderConstructionComponent) },
 
       // Rotas para ferramentas de funcionários (agora em páginas separadas)
       {
@@ -40,7 +39,7 @@ export const routes: Routes = [
           { path: 'confirmar-consultas', loadComponent: () => import('./features/employee-tools/confirm-appointments/confirm-appointments.component').then(m => m.ConfirmAppointmentsComponent) },
           { path: 'cadastrar-paciente', loadComponent: () => import('./features/employee-tools/register-patient/register-patient.component').then(m => m.RegisterPatientComponent) },
           { path: 'buscar-paciente', loadComponent: () => import('./features/employee-tools/search-patient/search-patients.component').then(m => m.SearchPatientsComponent) },
-          { path: 'agenda-completa', loadComponent: () => import('./pages/dashboard/components/employee-dashboard/components/full-schedule/full-schedule.component').then(m => m.FullScheduleComponent) },
+          { path: 'full-calendar', loadComponent: () => import('./pages/dashboard/components/employee-dashboard/components/full-schedule/full-schedule.component').then(m => m.FullScheduleComponent) },
         ]
       },
 

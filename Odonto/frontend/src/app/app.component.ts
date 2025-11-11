@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = 'SorrisoVida';
 }

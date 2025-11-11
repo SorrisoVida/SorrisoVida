@@ -1,67 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { User } from '../../../services/auth.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+interface User {
+  id: number;
+  nome: string;
+  email: string;
+  role: 'admin' | 'dentista' | 'atendente' | 'paciente';
+}
 
 @Component({
   selector: 'app-manage-users',
   standalone: true,
-  imports: [CommonModule, RouterModule, TitleCasePipe],
+  imports: [CommonModule, RouterModule],
   templateUrl: './manage-users.component.html',
   styleUrls: ['./manage-users.component.scss']
 })
 export class ManageUsersComponent implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
-  activeFilter: string = 'todos';
-
-  constructor(private router: Router) {}
+  activeFilter = 'todos';
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
   ngOnInit(): void {
-    // Dados mockados para a lista de usuários
-    this.users = [
-      { id: 1, nome: 'Admin Geral', email: 'admin@sorrisovida.com', role: 'admin' },
-      { id: 2, nome: 'Dra. Ana Costa', email: 'ana.costa@sorrisovida.com', role: 'dentista' },
-      { id: 3, nome: 'Carlos Almeida', email: 'carlos.almeida@sorrisovida.com', role: 'atendente' },
-      { id: 4, nome: 'Juliana Pereira', email: 'juliana.p@email.com', role: 'paciente' },
-      { id: 5, nome: 'Dr. Marcos Lima', email: 'marcos.lima@sorrisovida.com', role: 'dentista' },
-      { id: 6, nome: 'Beatriz Souza', email: 'beatriz.s@email.com', role: 'paciente' },
-    ];
-    this.filteredUsers = [...this.users]; // Inicializa a lista filtrada com todos os usuários
+    this.loadUsers();
   }
 
-  editUser(userId: number): void {
-    // Navega para a nova página de edição de usuário, passando o ID na rota.
-    this.router.navigate(['/admin/editar-usuario', userId]);
-  }
-
-  removeUser(userId: number): void {
-    if (confirm('Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.')) {
-      this.users = this.users.filter(u => u.id !== userId);
-      this.filterByRole(this.activeFilter); // Re-aplica o filtro para atualizar a lista visível
-    }
+  loadUsers(): void {
+    this.http.get<User[]>('/api/users').subscribe({
+      next: (data) => {
+        this.users = data;
+        this.filteredUsers = data;
+      },
+      error: (err) => console.error('Erro ao carregar usuários', err)
+    });
   }
 
   filterByRole(role: string): void {
     this.activeFilter = role;
     if (role === 'todos') {
-      this.filteredUsers = [...this.users];
+      this.filteredUsers = this.users;
     } else {
-      this.filteredUsers = this.users.filter(user => user.role === role);
+      this.filteredUsers = this.users.filter(u => u.role === role);
     }
   }
 
   sortByName(): void {
-    this.filteredUsers.sort((a, b) => a.nome.localeCompare(b.nome));
+    this.filteredUsers = [...this.filteredUsers].sort((a, b) =>
+      a.nome.localeCompare(b.nome)
+    );
+  }
+
+  editUser(id: number): void {
+    this.router.navigate([`/admin/users/edit/${id}`]);
+  }
+
+  removeUser(id: number): void {
+    if (!confirm('Tem certeza que deseja remover este usuário?')) return;
+    this.http.delete(`/api/users/${id}`).subscribe({
+      next: () => {
+        this.users = this.users.filter(u => u.id !== id);
+        this.filteredUsers = this.filteredUsers.filter(u => u.id !== id);
+      },
+      error: (err) => console.error('Erro ao remover usuário', err)
+    });
   }
 
   getRoleClass(role: string): string {
-    switch (role) {
-      case 'admin': return 'bg-danger';
-      case 'dentista': return 'bg-primary';
-      case 'atendente': return 'bg-info text-dark';
-      case 'paciente': return 'bg-secondary';
-      default: return 'bg-light text-dark';
-    }
+    const roleClasses: { [key: string]: string } = {
+      admin: 'bg-danger',
+      dentista: 'bg-primary',
+      atendente: 'bg-info',
+      paciente: 'bg-success'
+    };
+    return roleClasses[role] || 'bg-secondary';
   }
 }

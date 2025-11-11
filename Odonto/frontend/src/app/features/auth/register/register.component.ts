@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 import { passwordMatcherValidator } from '../components/password-matcher/password-matcher.validator';
 
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -52,9 +53,23 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Formulário enviado:', this.registerForm.value);
-      alert('Cadastro realizado com sucesso!');
-      this.registerForm.reset();
+      const payload = {
+        nome: this.registerForm.value.fullName,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.passwordGroup.password,
+        cpf: this.registerForm.value.cpf,
+        telefone: this.registerForm.value.phone
+      };
+      this.auth.register(payload).subscribe({
+        next: () => {
+          alert('Cadastro realizado com sucesso! Você foi autenticado.');
+          this.router.navigate(['/auth/login']);
+        },
+        error: (err: any) => {
+          console.error('Erro ao cadastrar', err);
+          alert(err?.error?.message || 'Erro ao cadastrar');
+        }
+      });
     } else {
       console.log('Formulário inválido. Verifique os campos.');
       this.registerForm.markAllAsTouched();

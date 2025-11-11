@@ -22,8 +22,5 @@ export class HomeComponent {
     { image: 'assets/images/clinica.jpg', alt: 'clínica' }
   ];
 
-  // Método para o botão de desenvolvimento
-  simularLogin(role: User['role']): void {
-    this.authService.simulateLogin(role);
-  }
+  // desenvolvimento: botão de simulação removido — use fluxo real de login
 }
