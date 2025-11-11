@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "nome": "Admin",
+    "email": "admin@local.test",
+    "password": "234567",
+    "role": "admin",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
+  },
+  {
+    "id": 2,
+    "nome": "Jirafales Chaves",
+    "email": "teste@teste.com.br",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "cpf": "223.454.767-89",
+    "telefone": "119000000",
+    "role": "paciente",
+    "status": "ativo"
+  }
+]
