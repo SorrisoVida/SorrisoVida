@@ -17,5 +17,23 @@
     "telefone": "119000000",
     "role": "paciente",
     "status": "ativo"
+  },
+  {
+    "id": 3,
+    "nome": "Dr Ana Paula",
+    "email": "anapaula@sorrisovida.com.br",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "dentista",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
+  },
+    {
+    "id": 4,
+    "nome": "Gabriel Duvall",
+    "email": "gabrielduvall@sorrisovida.com.br",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "atendente",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
   }
 ]
