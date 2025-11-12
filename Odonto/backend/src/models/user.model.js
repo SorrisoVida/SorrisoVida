@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 
 const DATA_FILE = path.join(__dirname, '../data/users.json');
 
@@ -20,7 +21,12 @@ const UserModel = {
   findById: (id) => users.find((u) => u.id === id),
   findByEmail: (email) => users.find((u) => u.email === email),
   create: (user) => {
-    const newUser = { id: users.length + 1, ...user };
+    // Garante que a senha seja hasheada se não estiver
+    const password = user.password.startsWith('$2a$') || user.password.startsWith('$2b$')
+      ? user.password
+      : bcrypt.hashSync(user.password, 8);
+
+    const newUser = { id: users.length + 1, ...user, password };
     users.push(newUser);
     saveUsers();
     return newUser;
