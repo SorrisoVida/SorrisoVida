@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, withHashLocation } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
@@ -14,7 +14,7 @@ import { EmployeeDashboard } from './pages/dashboard/components/employee-dashboa
 import { DashboardRedirectComponent } from './pages/dashboard/components/dashboard-redirect/dashboard-redirect.component';
 import { AdminDashboardComponent } from './pages/dashboard/components/admin-dashboard/admin-dashboard.component';
 import { employeeGuard } from './guards/employee.guard';
-
+ 
 export const routes: Routes = [
   // Rotas Principais (com cabeçalho)
   {
