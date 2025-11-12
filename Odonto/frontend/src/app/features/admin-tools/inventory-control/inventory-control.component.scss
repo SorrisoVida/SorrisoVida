@@ -1,0 +1,14 @@
+.card-header {
+  h5 {
+    font-weight: 500;
+    color: var(--bs-primary);
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.table th {
+  font-weight: 500;
+}

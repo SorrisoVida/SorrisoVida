@@ -1,0 +1,91 @@
+<div class="container my-5">
+  <!-- Cabeçalho -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Agenda Completa</h1>
+      <p class="lead text-muted">Sincronizado com Google Calendar</p>
+    </div>
+    <a routerLink="/dashboard/funcionario" class="btn btn-outline-primary">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel
+    </a>
+  </div>
+
+  <!-- Card Principal -->
+  <div class="card shadow-sm">
+    <!-- Header do Card -->
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+      <h4 class="mb-0"><i class="bi bi-calendar-week-fill me-2"></i>Google Calendar</h4>
+      <div>
+        <button *ngIf="!loggedIn" class="btn btn-light" (click)="signInWithGoogle()">
+          <i class="bi bi-google me-2"></i>Conectar com Google
+        </button>
+        <div *ngIf="loggedIn" class="d-flex gap-2 align-items-center">
+          <small>{{ user?.email }}</small>
+          <button class="btn btn-sm btn-light me-2" (click)="fetchAppointments()">
+            <i class="bi bi-arrow-clockwise"></i> Atualizar
+          </button>
+          <button class="btn btn-sm btn-outline-light" (click)="signOut()">Sair</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body do Card -->
+    <div class="card-body">
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <p class="text-muted">Carregando seus agendamentos...</p>
+      </div>
+
+      <!-- Erro -->
+      <div *ngIf="error && !isLoading" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-circle me-2"></i>{{ error }}
+      </div>
+
+      <!-- Lista de Agendamentos -->
+      <div *ngIf="!isLoading && !error && loggedIn && appointments.length > 0" class="list-group list-group-flush">
+        <div *ngFor="let appointment of appointments; let last = last" 
+             class="list-group-item d-flex justify-content-between align-items-start p-3"
+             [class.border-bottom]="!last">
+          <div class="flex-grow-1">
+            <h5 class="mb-1 text-primary">
+              <i class="bi bi-calendar-event me-2"></i>{{ appointment.summary || 'Sem título' }}
+            </h5>
+            <p *ngIf="appointment.description" class="mb-2 text-muted small">
+              {{ appointment.description }}
+            </p>
+            <small class="text-muted d-block">
+              <i class="bi bi-geo-alt me-1"></i>
+              <span *ngIf="appointment['location']">{{ appointment['location'] }}</span>
+              <span *ngIf="!appointment['location']">Local não especificado</span>
+            </small>
+          </div>
+          <div class="text-end ms-3">
+            <div class="badge bg-info text-dark mb-2">
+              <i class="bi bi-clock me-1"></i>
+              {{ appointment.start.dateTime ? (appointment.start.dateTime | date:'short') : (appointment.start.date | date:'short') }}
+            </div>
+            <div *ngIf="appointment.end?.dateTime" class="small text-muted">
+              Até: {{ appointment.end?.dateTime | date:'HH:mm' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vazio -->
+      <div *ngIf="!isLoading && !error && loggedIn && appointments.length === 0" class="alert alert-info text-center py-5">
+        <i class="bi bi-calendar-x display-4 d-block mb-2"></i>
+        <p>Nenhum agendamento futuro encontrado.</p>
+      </div>
+
+      <!-- Não conectado -->
+      <div *ngIf="!loggedIn && !isLoading && !error" class="alert alert-warning text-center py-5">
+        <i class="bi bi-lock display-4 d-block mb-2"></i>
+        <p class="mb-3">Conecte com sua conta Google para visualizar sua agenda</p>
+        <button class="btn btn-primary" (click)="signInWithGoogle()">
+          <i class="bi bi-google me-2"></i>Conectar com Google Calendar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<!-- Seção Hero -->
+<div class="hero-section text-center text-white" [style.backgroundImage]="heroImage">
+  <div class="hero-overlay"></div> 
+  <div class="hero-content">
+    <h1 class="display-4 fw-bold">Conheça a Clínica SorrisoVida</h1>
+    <p class="lead">Cuidando do seu sorriso com paixão e tecnologia desde 2010.</p>
+  </div>
+</div>
+
+<div class="container my-5">
+  <!-- Seção Missão, Visão e Valores -->
+  <section class="text-center mb-5">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm value-card">
+          <div class="card-body">
+            <i class="bi bi-heart-pulse-fill display-4 text-primary mb-3"></i>
+            <h4 class="card-title">Missão</h4>
+            <p class="card-text">Proporcionar um atendimento odontológico de excelência, com foco no tratamento humanizado e na saúde integral de nossos pacientes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm value-card">
+          <div class="card-body">
+            <i class="bi bi-eye-fill display-4 text-primary mb-3"></i>
+            <h4 class="card-title">Visão</h4>
+            <p class="card-text">Ser a clínica odontológica de referência na região, reconhecida pela qualidade técnica, inovação e pela relação de confiança com a comunidade.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm value-card">
+          <div class="card-body">
+            <i class="bi bi-gem display-4 text-primary mb-3"></i>
+            <h4 class="card-title">Valores</h4>
+            <p class="card-text">Excelência, Confiança, Inovação, Empatia e Respeito são os pilares que guiam cada um de nossos atendimentos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Nossa Equipe -->
+  <section class="team-section text-center py-5">
+    <h2 class="mb-5">Nossa Equipe</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1580281658223-9b93f18ae9ae?auto=format&fit=crop&w=400&q=80" class="img-fluid rounded-circle mb-3" alt="Foto do Dr. Arthur Moreira">
+          <h5>Dr. Carlos Souza</h5>
+          <p class="text-muted">Clínico Geral e Implantes</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" class="img-fluid rounded-circle mb-3" alt="Foto da Dra. Beatriz Lima">
+          <h5>Dra. Ana Paula</h5>
+          <p class="text-muted">Ortodontia e Odontopediatria</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Nossa Estrutura -->
+  <section class="structure-section text-center mb-5">
+    <h2 class="mb-5">Nossa Estrutura</h2>
+    <p class="lead mb-5">Contamos com um ambiente moderno, seguro e acolhedor, pensado para o seu conforto.</p>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded shadow-sm" alt="Consultório odontológico">
+      </div>
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded shadow-sm" alt="Equipamentos modernos">
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Call to Action (CTA) -->
+  <section class="cta-section text-center text-white p-5 rounded">
+    <div class="container">
+      <h2 class="display-5 fw-bold">Pronto para Sorrir?</h2>
+      <p class="lead my-4">
+        Nossa equipe está pronta para te ajudar a alcançar o sorriso dos seus sonhos.
+        <br>
+        Agende uma avaliação hoje mesmo.
+      </p>
+      <button (click)="handleScheduleClick()" class="btn btn-light btn-lg">Agendar Avaliação</button>
+    </div>
+  </section>
+</div>

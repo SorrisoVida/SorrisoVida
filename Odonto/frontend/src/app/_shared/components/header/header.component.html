@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" [routerLink]="logoRoute"> 
+      <img src="/assets/images/logo.png" alt="Logo da Sorriso Vida" width="55" height="55" class="me-2">
+      <h1>SorrisoVida</h1>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links do menu -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Agrupador para alinhar links e botões à direita -->
+      <div class="d-flex align-items-center ms-auto">
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-3 me-4">
+          <!-- Links públicos, visíveis apenas para visitantes e pacientes -->
+          <ng-container *ngIf="!isAdmin && !isEmployee">
+            <li class="nav-item">
+              <a class="nav-link fw-medium" routerLink="/sobre-nos" routerLinkActive="active">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-medium" routerLink="/contato" routerLinkActive="active">Contato</a>
+            </li>
+          </ng-container>
+          <!-- Para Pacientes, mostra um link para a Home -->
+          <li *ngIf="isPatient" class="nav-item">
+            <a class="nav-link fw-medium" [routerLink]="['/home']">Home</a>
+          </li>
+        </ul>
+  
+        <!-- Botões de Autenticação e Menu do Usuário -->
+        <div class="d-flex gap-3 align-items-center">
+          <!-- Se não estiver autenticado, mostra Login e Cadastro -->
+          <ng-container *ngIf="!isAuthenticated; else userMenu">
+            <a [routerLink]="['/auth/login']" class="btn btn-outline-light">Entrar</a>
+            <a [routerLink]="['/auth/register']" class="btn btn-light">Cadastrar-se</a>
+          </ng-container>
+
+          <!-- Se estiver autenticado, mostra o menu dropdown -->
+          <ng-template #userMenu>
+            <div bsDropdown [autoClose]="true">
+              <a href="javascript:void(0)" class="nav-link dropdown-toggle d-flex align-items-center" id="button-basic" bsDropdownToggle>
+                <span class="text-white fw-medium">{{ user?.nome || 'Minha conta' }}</span>
+                <i class="bi bi-person-circle fs-4 ms-2 text-white"></i>
+              </a>
+              <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="button-basic">
+                <!-- Item de Perfil (Comum a todos) -->
+                <li><a class="dropdown-item" [routerLink]="['/perfil']"><i class="bi bi-person-fill me-2"></i>Perfil</a></li>
+                
+                <!-- Menu do Paciente -->
+                <ng-container *ngIf="isPatient">
+                  <li><a class="dropdown-item" [routerLink]="['/dashboard/paciente']"><i class="bi bi-grid-1x2-fill me-2"></i>Meu Painel</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/my-appointments']"><i class="bi bi-card-list me-2"></i>Minhas Consultas</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/schedule']"><i class="bi bi-calendar-plus-fill me-2"></i>Agendar Consulta</a></li>
+                </ng-container>
+
+                <!-- Menu do Funcionário (Dentista/Atendente) -->
+                <ng-container *ngIf="isEmployee">
+                  <li><a class="dropdown-item" [routerLink]="['/dashboard/funcionario']"><i class="bi bi-clipboard-data-fill me-2"></i>Meu Painel</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/my-appointments']"><i class="bi bi-calendar-week-fill me-2"></i>Agenda Completa</a></li>
+                  <li *ngIf="isDentista"><a class="dropdown-item" [routerLink]="['/employee/buscar-paciente']"><i class="bi bi-search me-2"></i>Buscar Paciente</a></li>
+                  <li *ngIf="isDentista"><a class="dropdown-item" [routerLink]="['/employee/pending-charts']"><i class="bi bi-pencil-square me-2"></i>Prontuários Pendentes</a></li>
+                  <li *ngIf="isAtendente"><a class="dropdown-item" [routerLink]="['/schedule']"><i class="bi bi-calendar-plus-fill me-2"></i>Agendar Consulta</a></li>
+                </ng-container>
+
+                <!-- Menu do Admin -->
+                <ng-container *ngIf="isAdmin">
+                  <li><a class="dropdown-item" [routerLink]="['/dashboard/admin']"><i class="bi bi-shield-lock-fill me-2"></i>Painel Admin</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/gerenciar-usuarios']"><i class="bi bi-people-fill me-2"></i>Gerenciar Usuários</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/gerenciar-funcionarios']"><i class="bi bi-person-badge-fill me-2"></i>Gerenciar Funcionários</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/controle-estoque']"><i class="bi bi-box-seam-fill me-2"></i>Controle de Estoque</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/admin/reports']"><i class="bi bi-bar-chart-line-fill me-2"></i>Relatórios</a></li>
+                </ng-container>
+
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item text-danger" (click)="logout()">Sair</button></li>
+              </ul>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

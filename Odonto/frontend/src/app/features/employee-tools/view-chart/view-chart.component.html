@@ -1,0 +1,58 @@
+<div class="container my-5">
+  <!-- Cabeçalho e Botão Voltar -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Prontuário do Paciente</h1>
+      <p class="lead text-muted">Histórico completo de atendimentos e informações.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="goBack()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar para Busca
+    </button>
+  </div>
+
+  <!-- Informações do Paciente -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="mb-0">Dados do Paciente</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Nome:</strong> {{ patient.nome }}</p>
+          <p><strong>CPF:</strong> {{ patient.cpf }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Data de Nascimento:</strong> {{ patient.dataNascimento | date:'dd/MM/yyyy' }} ({{ patient.idade }} anos)</p>
+          <p><strong>Contato:</strong> {{ patient.contato }}</p>
+        </div>
+      </div>
+      <hr>
+      <h5>Informações Médicas</h5>
+      <p><strong>Alergias:</strong> {{ patient.alergias }}</p>
+      <p><strong>Observações:</strong> {{ patient.observacoes }}</p>
+    </div>
+  </div>
+
+  <!-- Histórico de Atendimentos -->
+  <div class="card">
+    <div class="card-header">
+      <h4 class="mb-0">Histórico de Atendimentos</h4>
+    </div>
+    <div class="card-body">
+      <div *ngIf="atendimentos.length > 0; else noAtendimentos" class="list-group">
+        <div *ngFor="let atendimento of atendimentos" class="list-group-item">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ atendimento.servico }}</h5>
+            <small>{{ atendimento.data | date:'dd/MM/yyyy' }}</small>
+          </div>
+          <p class="mb-1"><strong>Profissional:</strong> {{ atendimento.profissional }}</p>
+          <p class="mb-1"><strong>Procedimento Realizado:</strong> {{ atendimento.procedimento }}</p>
+          <small class="text-muted"><strong>Prescrição:</strong> {{ atendimento.prescricao }}</small>
+        </div>
+      </div>
+      <ng-template #noAtendimentos>
+        <p class="text-muted">Nenhum atendimento registrado para este paciente.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

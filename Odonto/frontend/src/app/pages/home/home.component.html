@@ -1,0 +1,128 @@
+<section class="hero-section">
+  <carousel [isAnimated]="true" [noPause]="false" [interval]="5000">
+    <slide *ngFor="let slide of slides">
+      <img [src]="slide.image" [alt]="slide.alt" class="slide-image">
+      <div class="carousel-caption d-none d-md-block">
+        <p class="lead my-4">Na SorrisoVida, sua saúde bucal é nossa prioridade. Oferecemos um atendimento completo e humanizado para você e sua família.</p>
+        <!-- Link condicional para agendamento -->
+        <ng-container *ngIf="isAuthenticated; else loginRedirect">
+          <a routerLink="/schedule" class="btn btn-secondary btn-lg">Agende sua consulta</a>
+        </ng-container>
+        <ng-template #loginRedirect>
+          <a routerLink="/auth/login" class="btn btn-secondary btn-lg">Agende sua consulta</a>
+        </ng-template>
+      </div>
+    </slide>
+  </carousel>
+</section>
+
+<div class="container my-5">
+
+  <section class="services-section text-center mb-5">
+    <h2 class="section-title mb-4">Nossos Serviços</h2>
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-braces fs-1 text-secondary mb-3"></i>
+            <h5 class="card-title">Ortodontia</h5>
+            <p class="card-text">Alinhamento perfeito para o seu sorriso com os aparelhos mais modernos.</p>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-brightness-high fs-1 text-secondary mb-3"></i>
+            <h5 class="card-title">Clareamento Dental</h5>
+            <p class="card-text">Recupere o branco natural dos seus dentes com segurança e eficácia.</p>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-gem fs-1 text-secondary mb-3"></i>
+            <h5 class="card-title">Implantes</h5>
+            <p class="card-text">Soluções definitivas para a perda de dentes, com tecnologia de ponta.</p>
+            <ng-container *ngIf="isAuthenticated; else loginLink">
+              <a routerLink="/under-construction" class="btn btn-outline-secondary">Saiba mais</a>
+            </ng-container>
+            <ng-template #loginLink><a routerLink="/auth/login" class="btn btn-outline-secondary">Saiba mais</a></ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="differentiators-section text-center bg-light p-5 rounded mb-5">
+    <h2 class="section-title mb-4">Por que escolher a SorrisoVida?</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <i class="bi bi-people-fill fs-2 text-secondary"></i>
+        <h5 class="mt-2">Equipe Especializada</h5>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-heart-fill fs-2 text-secondary"></i>
+        <h5 class="mt-2">Atendimento Humanizado</h5>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-cpu-fill fs-2 text-secondary"></i>
+        <h5 class="mt-2">Tecnologia de Ponta</h5>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-shield-check fs-2 text-secondary"></i>
+        <h5 class="mt-2">Ambiente Acolhedor</h5>
+      </div>
+    </div>
+  </section>
+
+  <section class="location-section mb-5">
+    <h2 class="section-title text-center mb-4">Onde Estamos Localizados</h2>
+    <div class="row">
+      <div class="col-md-6">
+
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.14590136649!2d-46.656571584476!3d-23.56309936754355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0x206c45b7f7a7d4c!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1652678912345" 
+          width="100%" 
+          height="300" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h4>Venha nos visitar!</h4>
+        <p><i class="bi bi-geo-alt-fill"></i> Endereço: Rua das Flores, 123 - Bairro, Cidade</p>
+        <p><i class="bi bi-telephone-fill"></i> Telefone: (11) 1234-5678</p>
+        <p><i class="bi bi-whatsapp"></i> WhatsApp: (11) 91234-5678</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<a href="https://wa.me/NOSSONUMERO" class="whatsapp-float" target="_blank">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<footer class="bg-dark text-white text-center p-4">
+  <div class="container">
+    <p>&copy; 2025 SorrisoVida. Todos os direitos reservados.</p>
+    <div>
+      <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</footer>

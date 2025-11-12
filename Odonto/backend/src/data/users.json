@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "nome": "Admin",
+    "email": "admin@local.test",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "admin",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
+  },
+  {
+    "id": 2,
+    "nome": "Rafaela",
+    "email": "teste@teste.com.br",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "cpf": "223.454.767-89",
+    "telefone": "119000000",
+    "role": "paciente",
+    "status": "ativo"
+  },
+  {
+    "id": 3,
+    "nome": "Dra. Ana Paula",
+    "email": "dentista@local.test",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "dentista",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
+  },
+  {
+    "id": 4,
+    "nome": "Gabriel Duvall",
+    "email": "atendente@local.test",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "atendente",
+    "status": "ativo",
+    "createdAt": "2025-11-11T19:37:36.915Z"
+  },
+  {
+    "id": 5,
+    "nome": "Pietro",
+    "email": "pietro.cardoso@gmail.com",
+    "password": "$2a$06$s0AjYJ.lMPDUeeAJqwRVG.fbbFj8aaeTz.rxsAx7u5FsqGj9d5fZ.",
+    "cpf": "343.234.100-80",
+    "telefone": "11912300545",
+    "role": "paciente",
+    "status": "ativo",
+    "createdAt": "2025-11-12T15:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "nome": "Dr. Carlos Souza",
+    "email": "dentista2@local.test",
+    "password": "$2a$06$OCci/iUmx3a5He60TkzyzeI7qXN6o5Bso5BbRaMlmEFpk7eJVECg6",
+    "role": "dentista",
+    "status": "ativo",
+    "createdAt": "2025-11-12T16:00:00.000Z"
+  }
+]

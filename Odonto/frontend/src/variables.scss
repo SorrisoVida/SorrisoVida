@@ -1,0 +1,17 @@
+// Paleta de Cores Principal
+$primary-color: #76c3ff; // Azul claro usado no header e títulos
+$secondary-color: #ffa47a; // Laranja usado no botão principal
+
+// Cores de Fundo
+$background-color: #f7f8fb; // Cinza claro para o fundo da página
+$container-bg-color: #ffffff; // Branco para os containers de formulário e texto no header
+
+// Cores de Texto e Bordas
+$text-color: #000000; // Cor de texto principal
+$placeholder-color: #aaa; // Cor para placeholders de inputs
+$border-color: #ddd; // Cor padrão para bordas de inputs
+$focus-border-color: $primary-color; // Cor da borda do input com foco
+
+// Raio da Borda (copiado do Bootstrap para consistência)
+$border-radius: .375rem !default;
+$border-radius-lg: .5rem !default;

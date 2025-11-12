@@ -1,0 +1,11 @@
+@use 'variables' as v;
+
+// Aplica o efeito hover a todos os cards que são links clicáveis
+.card.h-100 > a.stretched-link,
+.feature-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  &:hover .card { // O efeito é aplicado ao card pai quando o link é hover
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(v.$primary-color, 0.15) !important;
+  }
+}

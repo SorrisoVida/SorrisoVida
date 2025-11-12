@@ -1,0 +1,52 @@
+<div class="container my-5">
+  <!-- Cabeçalho -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Controle de Estoque</h1>
+      <p class="lead text-muted">Gerencie os materiais e suprimentos da clínica.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="navigationService.navigateBackToDashboard()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel
+    </button>
+  </div>
+
+  <!-- Tabela de Estoque -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Materiais Odontológicos</h5>
+      <button class="btn btn-primary">
+        <i class="bi bi-plus-circle-fill me-2"></i>Adicionar Material
+      </button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Fornecedor</th>
+            <th>Qtd. em Estoque</th>
+            <th>Estoque Mínimo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of inventoryItems">
+            <td>{{ item.name }}</td>
+            <td>{{ item.supplier }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.minStock }}</td>
+            <td>
+              <span class="badge" [ngClass]="{'bg-success': item.status === 'OK', 'bg-warning text-dark': item.status === 'Atenção', 'bg-danger': item.status === 'Crítico'}">
+                {{ item.status }}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-fill"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

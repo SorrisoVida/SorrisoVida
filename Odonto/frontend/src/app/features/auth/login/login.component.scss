@@ -1,0 +1,10 @@
+@use '../auth-base';
+
+.login-page {
+  @include auth-base.auth-page-layout;
+}
+
+.login-container {
+  @include auth-base.form-container-layout(500px);
+  @include auth-base.auth-container-content(500px);
+}

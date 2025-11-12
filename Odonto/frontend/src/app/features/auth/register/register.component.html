@@ -1,0 +1,104 @@
+<div class="register-page">
+  <div class="auth-wrapper">
+    <div class="mb-3">
+      <button class="btn btn-outline-primary w-10 return" routerLink="/home">
+        Voltar para o Início
+      </button>
+    </div>
+    <div class="register-container">
+      <div class="header">
+        <h1>Crie sua Conta na <strong class="name-enterprise">SorrisoVida</strong></h1>
+        <p>Preencha seus dados para agendar sua primeira consulta.</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group mb-3">
+          <label for="fullName">Nome Completo</label>
+          <input type="text" id="fullName" class="form-control" formControlName="fullName" placeholder="Seu nome completo"
+                 [class.is-invalid]="fullName?.invalid && fullName?.touched">
+          <div *ngIf="fullName?.invalid && fullName?.touched" class="invalid-feedback">
+            Nome completo é obrigatório.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" class="form-control" formControlName="cpf" placeholder="000.000.000-00"
+                 [class.is-invalid]="cpf?.invalid && cpf?.touched">
+          <div *ngIf="cpf?.errors?.['required'] && cpf?.touched" class="invalid-feedback">
+            CPF é obrigatório.
+          </div>
+          <div *ngIf="cpf?.errors?.['pattern'] && cpf?.touched" class="invalid-feedback">
+            Formato de CPF inválido.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" class="form-control" formControlName="phone" placeholder="(99) 99999-9999"
+                 [class.is-invalid]="phone?.invalid && phone?.touched">
+          <div *ngIf="phone?.invalid && phone?.touched" class="invalid-feedback">
+            Telefone é obrigatório.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-control" formControlName="email" placeholder="seu.email@exemplo.com"
+                 [class.is-invalid]="email?.invalid && email?.touched">
+          <div *ngIf="email?.errors?.['required'] && email?.touched" class="invalid-feedback">
+            E-mail é obrigatório.
+          </div>
+          <div *ngIf="email?.errors?.['email'] && email?.touched" class="invalid-feedback">
+            Formato de e-mail inválido.
+          </div>
+        </div>
+
+        <div formGroupName="passwordGroup">
+          <div class="form-group mb-3">
+            <label for="password">Criar Senha</label>
+            <input type="password" id="password" class="form-control" formControlName="password"
+                   [class.is-invalid]="password?.invalid && password?.touched">
+            <small class="form-text text-muted">Mínimo 6 caracteres</small>
+            <div *ngIf="password?.errors?.['required'] && password?.touched" class="invalid-feedback">
+              Senha é obrigatória.
+            </div>
+            <div *ngIf="password?.errors?.['minlength'] && password?.touched" class="invalid-feedback">
+              A senha deve ter no mínimo 6 caracteres.
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="confirmPassword">Confirmar Senha</label>
+            <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Repita a senha"
+                   [class.is-invalid]="(confirmPassword?.invalid || registerForm.get('passwordGroup')?.hasError('mismatch')) && confirmPassword?.touched">
+            <div *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched" class="invalid-feedback">
+              A confirmação da senha é obrigatória.
+            </div>
+            <div *ngIf="registerForm.get('passwordGroup')?.hasError('mismatch') && confirmPassword?.touched" class="invalid-feedback">
+              As senhas não coincidem.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check mb-4">
+          <input type="checkbox" id="terms" class="form-check-input" formControlName="terms"
+                 [class.is-invalid]="terms?.invalid && registerForm.touched">
+          <label for="terms" class="form-check-label">Li e concordo com os <strong>Termos de Uso</strong>.</label>
+          <div *ngIf="terms?.invalid && registerForm.touched" class="invalid-feedback">
+            Você deve aceitar os termos de uso.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+          Finalizar Cadastro
+        </button>
+
+        <a routerLink="/auth/login" class="d-block text-center mt-3">
+          Já possui uma conta? <strong>Entrar</strong>
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

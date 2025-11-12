@@ -1,0 +1,81 @@
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Relatórios e Análises</h1>
+      <p class="lead text-muted">Acompanhe os indicadores chave e exporte dados da clínica.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="navigationService.navigateBackToDashboard()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel Admin
+    </button>
+  </div>
+
+  <!-- Seção de Exportação -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header">
+      <h4 class="mb-0"><i class="bi bi-download me-2"></i>Exportar Relatórios</h4>
+    </div>
+    <div class="card-body">
+      <p>Selecione o formato para baixar o relatório financeiro completo do último mês.</p>
+      <div class="d-flex gap-3">
+        <button class="btn btn-success" (click)="downloadReport('csv')">
+          <i class="bi bi-filetype-csv me-2"></i>Baixar CSV
+        </button>
+        <button class="btn btn-success" (click)="downloadReport('excel')">
+          <i class="bi bi-file-earmark-excel-fill me-2"></i>Baixar Excel
+        </button>
+        <button class="btn btn-danger" (click)="downloadReport('pdf')">
+          <i class="bi bi-file-earmark-pdf-fill me-2"></i>Baixar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard de Visualização -->
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h4 class="mb-0"><i class="bi bi-bar-chart-line-fill me-2"></i>Dashboard de Indicadores</h4>
+    </div>
+    <div class="card-body">
+      <!-- KPIs -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card text-center h-100 bg-light">
+            <div class="card-body">
+              <h6 class="card-title text-muted">Faturamento (Mês)</h6>
+              <p class="display-5 fw-bold text-primary">R$ 45.8k</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card text-center h-100 bg-light">
+            <div class="card-body">
+              <h6 class="card-title text-muted">Consultas Realizadas</h6>
+              <p class="display-5 fw-bold text-primary">182</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card text-center h-100 bg-light">
+            <div class="card-body">
+              <h6 class="card-title text-muted">Novos Pacientes</h6>
+              <p class="display-5 fw-bold text-primary">23</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card text-center h-100 bg-light">
+            <div class="card-body">
+              <h6 class="card-title text-muted">Taxa de Ocupação</h6>
+              <p class="display-5 fw-bold text-primary">85%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfico de Exemplo -->
+      <div>
+        <canvas #revenueChart></canvas>
+      </div>
+    </div>
+  </div>
+</div>

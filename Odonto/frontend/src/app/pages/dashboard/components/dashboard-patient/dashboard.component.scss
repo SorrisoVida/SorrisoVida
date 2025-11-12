@@ -1,0 +1,40 @@
+@use 'variables' as v;
+@use 'sass:color';
+
+.dashboard-container {
+  // Adiciona rolagem suave para as âncoras
+  scroll-behavior: smooth;
+
+  .header h1 {
+    font-weight: 300;
+  }
+
+  .action-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+  }
+
+  .consultas-section {
+    .next-appointment-highlight {
+      border-left: 4px solid v.$primary-color;
+      background-color: color.adjust(v.$primary-color, $lightness: 35%);
+    }
+
+    .list-group-item {
+      transition: background-color 0.2s ease-in-out;
+
+      &:not(.next-appointment-highlight):hover {
+        background-color: color.adjust(v.$primary-color, $lightness: 38%);
+      }
+    }
+  }
+
+  .table-hover tbody tr:hover {
+    td, th {
+      background-color: color.adjust(v.$primary-color, $lightness: 38%);
+    }
+  }
+}
