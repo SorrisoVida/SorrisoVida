@@ -1,59 +1,48 @@
-# Frontend
+# Sorriso Vida - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+Este é o frontend da aplicação Sorriso Vida, desenvolvido com **Angular**. Ele fornece a interface de usuário para pacientes, atendentes, dentistas e administradores interagirem com o sistema da clínica.
 
-## Development server
+## ✨ Funcionalidades
 
-To start a local development server, run:
+- Login e registro de usuários.
+- Agendamento de consultas.
+- Visualização de horários e profissionais.
+- Painéis de controle baseados no perfil do usuário (paciente, atendente, dentista, admin).
+- Gerenciamento de usuários e agendamentos (para perfis autorizados).
 
+## 🚀 Tecnologias Utilizadas
+
+- **Angular**: Framework principal para a construção da SPA (Single Page Application).
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
+- **RxJS**: Para programação reativa e gerenciamento de estados e eventos assíncronos.
+- **Angular Material / Bootstrap**: Componentes de UI para uma interface moderna e responsiva.
+- **SCSS**: Pré-processador de CSS.
+
+## ⚙️ Configuração do Ambiente
+
+1.  **Instale as dependências:**
+    Navegue até a pasta `Odonto/frontend` e execute:
+    ```bash
+    npm install
+    ```
+
+2.  **Inicie o servidor de desenvolvimento:**
+    Execute o comando abaixo para iniciar a aplicação. O servidor de desenvolvimento do Angular irá recarregar automaticamente a página sempre que houver alterações nos arquivos.
+    ```bash
+    ng serve
+    ```
+    ou
+    ```bash
+    npm start
+    ```
+    A aplicação estará disponível em `http://localhost:4200/`.
+
+    > **Nota:** O projeto está configurado com um proxy (`proxy.conf.json`) que redireciona as chamadas de API (`/api`) para o backend (por padrão, `http://localhost:3000`). Certifique-se de que o servidor backend esteja em execução.
+
+## 📦 Build para Produção
+
+Para gerar os arquivos otimizados para produção, execute o seguinte comando:
 ```bash
-ng serve
+ng build --configuration=production
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Os arquivos do build serão gerados no diretório `dist/frontend/browser`.
