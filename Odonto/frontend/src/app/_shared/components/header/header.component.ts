@@ -37,6 +37,14 @@ export class HeaderComponent implements OnInit {
     return role === 'dentista' || role === 'atendente';
   }
 
+  get isAtendente(): boolean {
+    return this.user?.role === 'atendente';
+  }
+
+  get isDentista(): boolean {
+    return this.user?.role === 'dentista';
+  }
+
   get isPatient(): boolean {
     return this.isAuthenticated && !this.isAdmin && !this.isEmployee;
   }
@@ -51,7 +59,10 @@ export class HeaderComponent implements OnInit {
     if (this.isEmployee) {
       return ['/dashboard/funcionario'];
     }
-    // Para pacientes e usuários não autenticados, o logo leva para a home.
+    if (this.isPatient) {
+      return ['/dashboard/paciente'];
+    }
+    // Para usuários não autenticados, o logo leva para a home.
     return ['/home'];
   }
 

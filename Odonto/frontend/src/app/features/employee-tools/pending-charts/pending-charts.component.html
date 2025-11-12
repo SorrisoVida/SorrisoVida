@@ -1,0 +1,38 @@
+<div class="container my-5">
+  <!-- Cabeçalho e Botão Voltar -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Prontuários Pendentes</h1>
+      <p class="lead text-muted">Finalize o preenchimento dos prontuários das últimas consultas realizadas.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="navigationService.navigateBackToDashboard()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel
+    </button>
+  </div>
+
+  <!-- Lista de Prontuários Pendentes -->
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="pendingCharts.length > 0; else noPending" class="list-group">
+        <div *ngFor="let chart of pendingCharts" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-1">{{ chart.patientName }}</h5>
+            <p class="mb-1 text-muted">
+              Consulta de <strong>{{ chart.service }}</strong> realizada em {{ chart.appointmentDate | date:'dd/MM/yyyy' }}
+            </p>
+          </div>
+          <a [routerLink]="['/employee/preencher-prontuario', chart.id]" class="btn btn-primary">
+            <i class="bi bi-pencil-fill me-2"></i>Preencher Prontuário
+          </a>
+        </div>
+      </div>
+      <ng-template #noPending>
+        <div class="text-center p-5 border rounded bg-light">
+          <i class="bi bi-check-circle-fill display-4 text-success mb-3"></i>
+          <h4 class="text-success">Parabéns!</h4>
+          <p class="text-muted mb-0">Não há nenhum prontuário pendente.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

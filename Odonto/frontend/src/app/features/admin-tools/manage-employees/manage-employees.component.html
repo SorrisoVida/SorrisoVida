@@ -1,0 +1,101 @@
+<div class="container my-5">
+  <!-- Cabeçalho -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-6">Gerenciar Funcionários</h1>
+      <p class="lead text-muted">Cadastre e visualize os funcionários da clínica.</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="navigationService.navigateBackToDashboard()">
+      <i class="bi bi-arrow-left me-2"></i>Voltar ao Painel
+    </button>
+  </div>
+
+  <!-- Formulário de Cadastro -->
+  <div class="card mb-5">
+    <div class="card-header">
+      <h5 class="mb-0">Cadastrar Novo Funcionário</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="nome" placeholder="Nome Completo" formControlName="nome">
+              <label for="nome">Nome Completo</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="password" class="form-control" id="password" placeholder="Senha Provisória" formControlName="password">
+              <label for="password">Senha Provisória</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select" id="role" formControlName="role">
+                <option value="" disabled>Selecione o cargo</option>
+                <option value="dentista">Dentista</option>
+                <option value="atendente">Atendente</option>
+              </select>
+              <label for="role">Cargo</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="number" class="form-control" id="salario" placeholder="Salário (R$)" formControlName="salario">
+              <label for="salario">Salário (R$)</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="date" class="form-control" id="dataAdmissao" formControlName="dataAdmissao">
+              <label for="dataAdmissao">Data de Admissão</label>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">
+            <i class="bi bi-plus-circle-fill me-2"></i>Adicionar Funcionário
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista de Funcionários -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Quadro de Funcionários</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Data de Admissão</th>
+            <th>Salário</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>{{ employee.nome }}</td>
+            <td>{{ employee.email }}</td>
+            <td><span class="badge" [ngClass]="{'bg-primary': employee.role === 'dentista', 'bg-info': employee.role === 'atendente'}">{{ employee.role | titlecase }}</span></td>
+            <td>{{ employee.dataAdmissao | date:'dd/MM/yyyy' }}</td>
+            <td>{{ employee.salario | currency:'BRL' }}</td>
+            <td><span class="badge" [ngClass]="{'bg-success': employee.status === 'ativo', 'bg-secondary': employee.status === 'inativo'}">{{ employee.status | titlecase }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

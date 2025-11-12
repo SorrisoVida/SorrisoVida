@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1731344400000,
+    "servico": "Limpeza",
+    "profissionalId": 3,
+    "profissionalNome": "Dra. Ana Paula",
+    "data": "2025-11-12",
+    "horario": "10:00",
+    "pacienteId": 2,
+    "pacienteNome": "Rafaela",
+    "status": "agendado"
+  },
+  {
+    "id": 1731348000000,
+    "servico": "Avaliação",
+    "profissionalId": 3,
+    "profissionalNome": "Dra. Ana Paula",
+    "data": "2025-11-12",
+    "horario": "11:00",
+    "pacienteId": 5,
+    "pacienteNome": "Pietro",
+    "status": "confirmado"
+  }
+]

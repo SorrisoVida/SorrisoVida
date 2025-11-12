@@ -1,34 +1,30 @@
-const { verifyToken } = require('../utils/jwt.util');
+const jwt = require('jsonwebtoken');
+const config = require('../config/index');
 
-const authenticateToken = (req, res, next) => {
+function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
-  if (!token) {
-    return res.status(401).json({ message: 'Token não fornecido' });
+  if (token == null) {
+    return res.status(401).json({ message: 'Token não fornecido.' });
   }
 
-  const decoded = verifyToken(token);
-  if (!decoded) {
-    return res.status(403).json({ message: 'Token inválido ou expirado' });
-  }
+  jwt.verify(token, config.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Token inválido.' });
+    }
+    req.user = user;
+    next();
+  });
+}
 
-  req.user = decoded;
-  next();
-};
+function authorizeRole(roles) {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ message: 'Acesso negado: você não tem permissão para este recurso.' });
+    }
+    next();
+  };
+}
 
-const adminOnly = (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Acesso negado - apenas admin' });
-  }
-  next();
-};
-
-const employeeOnly = (req, res, next) => {
-  if (!['admin', 'dentista', 'atendente'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Acesso negado - apenas funcionários' });
-  }
-  next();
-};
-
-module.exports = { authenticateToken, adminOnly, employeeOnly };
+module.exports = { authenticateToken, authorizeRole };

@@ -32,14 +32,18 @@ export const routes: Routes = [
 
       // Rotas para ferramentas de funcionários (agora em páginas separadas)
       {
-        path: 'employee', // Prefixo para todas as ferramentas
-        canActivate: [employeeGuard], // Guarda aplicada a todas as rotas filhas
+        path: 'employee', 
+        canActivate: [employeeGuard], 
         children: [
           { path: 'gerenciar-fila', loadComponent: () => import('./features/employee-tools/manage-queue/manage-queue.component').then(m => m.ManageQueueComponent) },
           { path: 'confirmar-consultas', loadComponent: () => import('./features/employee-tools/confirm-appointments/confirm-appointments.component').then(m => m.ConfirmAppointmentsComponent) },
           { path: 'cadastrar-paciente', loadComponent: () => import('./features/employee-tools/register-patient/register-patient.component').then(m => m.RegisterPatientComponent) },
-          { path: 'buscar-paciente', loadComponent: () => import('./features/employee-tools/search-patient/search-patients.component').then(m => m.SearchPatientsComponent) },
           { path: 'full-calendar', loadComponent: () => import('./pages/dashboard/components/employee-dashboard/components/full-schedule/full-schedule.component').then(m => m.FullScheduleComponent) },
+          { path: 'buscar-paciente', loadComponent: () => import('./features/employee-tools/buscar-paciente/buscar-paciente.component').then(m => m.BuscarPacienteComponent) },
+          { path: 'pending-charts', loadComponent: () => import('./features/employee-tools/pending-charts/pending-charts.component').then(m => m.PendingChartsComponent) },
+          { path: 'prontuario/:id', loadComponent: () => import('./features/employee-tools/view-chart/view-chart.component').then(m => m.ViewChartComponent) },
+          { path: 'preencher-prontuario/:id', loadComponent: () => import('./features/employee-tools/fill-chart/fill-chart.component').then(m => m.FillChartComponent) },
+
         ]
       },
 
@@ -52,6 +56,8 @@ export const routes: Routes = [
           { path: 'reports', loadComponent: () => import('./features/admin-tools/reports/reports.component').then(m => m.ReportsComponent) },
           { path: 'approve-registrations', loadComponent: () => import('./features/admin-tools/approve-registrations/approve-registrations.component').then(m => m.ApproveRegistrationsComponent) },
           { path: 'editar-usuario/:id', loadComponent: () => import('./features/admin-tools/edit-user/edit-user.component').then(m => m.EditUserComponent) },
+          { path: 'gerenciar-funcionarios', loadComponent: () => import('./features/admin-tools/manage-employees/manage-employees.component').then(m => m.ManageEmployeesComponent) },
+          { path: 'controle-estoque', loadComponent: () => import('./features/admin-tools/inventory-control/inventory-control.component').then(m => m.InventoryControlComponent) },
         ]
       },
 

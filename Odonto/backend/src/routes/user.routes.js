@@ -1,16 +1,16 @@
 const express = require('express');
 const UserModel = require('../models/user.model');
-const { authenticateToken, adminOnly } = require('../middleware/auth.middleware');
+const { authenticateToken, authorizeRole } = require('../middleware/auth.middleware');
 const router = express.Router();
 
 // GET /api/users - apenas admin
-router.get('/', authenticateToken, adminOnly, (req, res) => {
+router.get('/', authenticateToken, authorizeRole(['admin']), (req, res) => {
 	const users = UserModel.findAll();
 	res.json({ users });
 });
 
 // POST /api/users - admin cria dentista/atendente
-router.post('/', authenticateToken, adminOnly, (req, res) => {
+router.post('/', authenticateToken, authorizeRole(['admin']), (req, res) => {
 	const { nome, email, password, role } = req.body;
 	if (!nome || !email || !password || !role) {
 		return res.status(400).json({ message: 'nome, email, senha e role são obrigatórios' });
@@ -45,7 +45,7 @@ router.put('/:id', authenticateToken, (req, res) => {
 });
 
 // DELETE /api/users/:id - admin only
-router.delete('/:id', authenticateToken, adminOnly, (req, res) => {
+router.delete('/:id', authenticateToken, authorizeRole(['admin']), (req, res) => {
 	const { id } = req.params;
 	const ok = UserModel.delete(id);
 	if (!ok) return res.status(404).json({ message: 'Usuário não encontrado' });
@@ -53,4 +53,3 @@ router.delete('/:id', authenticateToken, adminOnly, (req, res) => {
 });
 
 module.exports = router;
-

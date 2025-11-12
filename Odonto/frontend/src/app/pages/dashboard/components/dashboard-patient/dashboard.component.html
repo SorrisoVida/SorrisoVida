@@ -33,53 +33,10 @@
           <i class="bi bi-card-list display-4 text-secondary"></i>
           <h5 class="card-title mt-3">Minhas Consultas</h5>
           <p class="card-text">Veja seu histórico e suas próximas consultas.</p>
-          <a href="/my-appointments" class="btn btn-outline-secondary">Ver Consultas</a>
+          <a routerLink="/my-appointments" class="btn btn-outline-secondary">Ver Consultas</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Seção de Consultas (Próximas e Histórico) -->
-  <section id="consultas" class="consultas-section">
-    <!-- Próximas Consultas -->
-    <h2 class="section-title mb-4">Próximas Consultas</h2>
-    <div *ngIf="proximasConsultas.length > 0; else noFutureAppointments" class="list-group mb-5">
-      <div *ngFor="let consulta of proximasConsultas; let isFirst = first" 
-           class="list-group-item list-group-item-action flex-column align-items-start"
-           [class.next-appointment-highlight]="isFirst">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">{{ consulta.servico }} <span *ngIf="isFirst" class="badge bg-primary-subtle text-primary-emphasis rounded-pill ms-2">Próxima</span></h5>
-          <small class="text-muted">{{ consulta.data | date:'fullDate' }}</small>
-        </div>
-        <p class="mb-1">Com <strong>{{ consulta.profissional }}</strong> às <strong>{{ consulta.horario }}</strong>.</p>
-      </div>
-    </div>
-    <ng-template #noFutureAppointments>
-      <p class="text-muted mb-5">Você não tem nenhuma consulta agendada.</p>
-    </ng-template>
-
-    <!-- Histórico de Consultas -->
-    <h2 class="section-title mb-4">Histórico de Consultas</h2>
-    <div *ngIf="historicoConsultas.length > 0; else noHistory" class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Data</th>
-            <th>Serviço</th>
-            <th>Profissional</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let consulta of historicoConsultas">
-            <td>{{ consulta.data | date:'dd/MM/yyyy' }}</td>
-            <td>{{ consulta.servico }}</td>
-            <td>{{ consulta.profissional }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <ng-template #noHistory>
-      <p class="text-muted">Você ainda não possui um histórico de consultas.</p>
-    </ng-template>
-  </section>  
 </div>

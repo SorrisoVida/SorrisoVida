@@ -3,4 +3,8 @@
 $primary: v.$primary-color;
 $secondary: v.$secondary-color;
 
+// Importa os arquivos-fonte do Bootstrap para permitir a customização de variáveis acima.
 @import 'bootstrap/scss/bootstrap';
+
+// Importa os ícones do Bootstrap
+@import "bootstrap-icons/font/bootstrap-icons.css";
