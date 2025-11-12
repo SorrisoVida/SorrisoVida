@@ -39,7 +39,7 @@ describe('EmployeeDashboard', () => {
 
   describe('quando o usuário é Dentista', () => {
     beforeEach(async () => {
-      const dentistaUser: User = { id: 2, nome: 'Dentista Teste', email: 'd@d.com', role: 'dentista' };
+      const dentistaUser: User = { id: 3, nome: 'Dentista Teste', email: 'd@d.com', role: 'dentista' };
       // Apenas configuramos o valor de retorno do spy, sem recriá-lo
       (mockAuthService.getUser as jasmine.Spy).and.returnValue(dentistaUser);
       fixture.detectChanges(); // Executa o ngOnInit com o usuário dentista
@@ -57,7 +57,7 @@ describe('EmployeeDashboard', () => {
 
   describe('quando o usuário é Atendente', () => {
     beforeEach(async () => {
-      const atendenteUser: User = { id: 3, nome: 'Atendente Teste', email: 'at@at.com', role: 'atendente' };
+      const atendenteUser: User = { id: 4, nome: 'Atendente Teste', email: 'at@at.com', role: 'atendente' };
       // Apenas configuramos o valor de retorno do spy
       (mockAuthService.getUser as jasmine.Spy).and.returnValue(atendenteUser);
       fixture.detectChanges(); // Executa o ngOnInit com o usuário atendente
