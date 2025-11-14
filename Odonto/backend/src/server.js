@@ -23,7 +23,7 @@ const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: config.FRONTEND_URL || '*' } });
 
 // middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
